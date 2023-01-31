@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:cool_alert/cool_alert.dart';
 import 'package:fairhouseexpositor/models/Usuario.dart';
 import 'package:fairhouseexpositor/models/url_service.dart';
 import 'package:fairhouseexpositor/stores/resumo_stand.dart';
@@ -12,11 +13,11 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class StaggerAnimation extends StatelessWidget {
-  final AnimationController controller;
-  final TextEditingController controllerUser;
-  final TextEditingController controllerPass;
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  GlobalKey<ScaffoldState> scaffoldkey = GlobalKey<ScaffoldState>();
+  final AnimationController? controller;
+  final TextEditingController? controllerUser;
+  final TextEditingController? controllerPass;
+  GlobalKey<FormState>? formKey = GlobalKey<FormState>();
+  GlobalKey<ScaffoldState>? scaffoldkey = GlobalKey<ScaffoldState>();
 
   StaggerAnimation(
       {@required this.controller,
@@ -26,7 +27,7 @@ class StaggerAnimation extends StatelessWidget {
       @required this.scaffoldkey})
       : buttonSqueeze = Tween(begin: 320.0, end: 60.0).animate(
           CurvedAnimation(
-            parent: controller,
+            parent: controller!,
             curve: Interval(0.0, 0.150),
           ),
         ),
@@ -47,12 +48,12 @@ class StaggerAnimation extends StatelessWidget {
   final Animation<double> buttonSqueeze;
   final Animation<double> buttonZoomOut;
 
-  Widget _builderAnimation(BuildContext context, Widget child) {
+  Widget _builderAnimation(BuildContext context, Widget? child) {
     return Padding(
       padding: EdgeInsets.only(bottom: 50),
       child: InkWell(
         onTap: () {
-          if (formKey.currentState.validate()) {
+          if (formKey!.currentState!.validate()) {
             _getDadosLogin(context);
           }
         },
@@ -87,7 +88,7 @@ class StaggerAnimation extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       builder: _builderAnimation,
-      animation: controller,
+      animation: controller!,
     );
   }
 
@@ -112,7 +113,7 @@ class StaggerAnimation extends StatelessWidget {
   Future _getDadosLogin(BuildContext context) async {
     FocusScope.of(context).requestFocus(new FocusNode());
 
-    var url = getUrlLogin(controllerUser.text, controllerPass.text);
+    var url = getUrlLogin(controllerUser!.text, controllerPass!.text);
 
     try {
       var response = await http.get(url);
@@ -125,29 +126,29 @@ class StaggerAnimation extends StatelessWidget {
           GetIt.I<VisitantesFeira>().loadVisitantes();
           GetIt.I<ResumoStand>().loadResumo();
 
-          controller.forward();
+          controller!.forward();
         }
       } else if (response.statusCode == 401) {
-        scaffoldkey.currentState.showSnackBar(SnackBar(
-          content: Text(
-              "Usuário e/ou senha incorretos.\nVerifique e tente novamente.",
-              textAlign: TextAlign.center),
-        ));
+        CoolAlert.show(
+            context: context,
+            type: CoolAlertType.warning,
+            text:
+                "Usuário e/ou senha incorretos.\nVerifique e tente novamente.",
+            title: "Atenção");
       } else {
-        scaffoldkey.currentState.showSnackBar(SnackBar(
-          content: Text(
-              "Sem conexão com o servidor! Status: ${response.statusCode}",
-              textAlign: TextAlign.center),
-        ));
+        CoolAlert.show(
+            context: context,
+            type: CoolAlertType.error,
+            text: "Sem conexão com o servidor! Status: ${response.statusCode}",
+            title: "Erro");
       }
     } on Exception {
-      scaffoldkey.currentState.showSnackBar(
-        SnackBar(
-          content: Text(
+      CoolAlert.show(
+          context: context,
+          type: CoolAlertType.warning,
+          text:
               "Problemas com o login, verifique usuário e senha e sua conexão com servidor.",
-              textAlign: TextAlign.center),
-        ),
-      );
+          title: "Atenção");
     }
   }
 }

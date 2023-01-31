@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 
 class InputField extends StatelessWidget {
-  final String hint;
-  final bool obscure;
-  final IconData icon;
-  final String validateText;
-  final bool autoFocus;
-  final TextEditingController controller;
+  final String? hint;
+  final bool? obscure;
+  final IconData? icon;
+  final String? validateText;
+  final bool? autoFocus;
+  final TextEditingController? controller;
 
-
-  InputField({@required this.hint,@required  this.obscure,@required  this.icon,@required  this.controller,@required  this.validateText, @required this.autoFocus});
+  InputField(
+      {@required this.hint,
+      @required this.obscure,
+      @required this.icon,
+      @required this.controller,
+      @required this.validateText,
+      @required this.autoFocus});
 
   @override
   Widget build(BuildContext context) {
@@ -23,13 +28,13 @@ class InputField extends StatelessWidget {
       child: TextFormField(
         // ignore: missing_return
         validator: (value) {
-          if(value.isEmpty){
+          if (value!.isEmpty) {
             return validateText;
           }
         },
-        autofocus: autoFocus,
+        autofocus: autoFocus!,
         controller: controller,
-        obscureText: obscure,
+        obscureText: obscure!,
         style: TextStyle(color: Colors.black38),
         keyboardType: TextInputType.number,
 

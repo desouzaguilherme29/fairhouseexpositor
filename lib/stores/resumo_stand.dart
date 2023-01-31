@@ -6,8 +6,8 @@ part 'resumo_stand.g.dart';
 
 class ResumoStand = _ResumoStand with _$ResumoStand;
 
-abstract class _ResumoStand with Store{
-  _ResumoStand(){
+abstract class _ResumoStand with Store {
+  _ResumoStand() {
     loadResumo();
   }
 
@@ -26,7 +26,7 @@ abstract class _ResumoStand with Store{
   void setLoading(bool value) => loading = value;
 
   @observable
-  String error;
+  String? error;
 
   @action
   void setError(value) => error = value;
@@ -45,11 +45,11 @@ abstract class _ResumoStand with Store{
 
       loading = false;
       error = null;
-      return true;
+      //return true;
     } catch (e) {
       error = e.toString();
       loading = false;
-      return false;
+      //return false;
     }
   }
 }

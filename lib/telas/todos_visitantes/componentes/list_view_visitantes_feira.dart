@@ -4,8 +4,9 @@ import 'package:fairhouseexpositor/stores/visitantes_feira.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_it/get_it.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:fairhouseexpositor/extensions/extensions.dart';
+
+import '../../../globais/global_functions.dart';
 
 VisitantesFeira visitanteStore = GetIt.I<VisitantesFeira>();
 UserManagerStore _user = GetIt.I<UserManagerStore>();
@@ -94,14 +95,15 @@ Widget _singleItemWidget(VisitanteFeira visitante, BuildContext context) {
                   ),
                   GestureDetector(
                     onTap: () async {
-                      var url = "whatsapp://send?phone=+55${visitante.celular}&text=Olá, Notei que Você esta visitando a FairHouse Cascavel, Venha nos visitar no nosso stand! Att. ${_user.user.nome.toLowerCase().capitalizeFirstofEach}.";
-
-                      if (await canLaunch(url)) {
-                        await launch(url);
-                      }
+                      chamarWhats(
+                        number: visitante.celular!,
+                        text:
+                            "Olá, Notei que Você esta visitando a FairHouse, Venha nos visitar no nosso stand! Att. ${_user.user!.nome!.toLowerCase().capitalizeFirstofEach}.",
+                      );
                     },
                     child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                       child: Icon(
                         FontAwesomeIcons.whatsapp,
                         color: Colors.green,

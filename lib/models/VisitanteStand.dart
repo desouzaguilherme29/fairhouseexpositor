@@ -1,9 +1,9 @@
 class VisitanteStand {
-  String cidade;
-  String nome;
-  String fantasia;
-  String celular;
-  String expositor;
+  String? cidade;
+  String? nome;
+  String? fantasia;
+  String? celular;
+  String? expositor;
 
   VisitanteStand(
       {this.cidade, this.nome, this.fantasia, this.celular, this.expositor});

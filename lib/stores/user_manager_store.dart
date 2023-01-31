@@ -8,36 +8,35 @@ part 'user_manager_store.g.dart';
 
 class UserManagerStore = _UserManagerStore with _$UserManagerStore;
 
-abstract class _UserManagerStore with Store{
-
-  _UserManagerStore(){
+abstract class _UserManagerStore with Store {
+  _UserManagerStore() {
     _getUsuarioConectado();
   }
 
   @observable
-  Usuario user;
+  Usuario? user;
 
   @computed
   bool get isLoggedIn => user != null;
 
   @action
-  setUser(Usuario value) async {
+  setUser(Usuario? value) async {
     user = value;
 
     if (isLoggedIn) {
       Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
       final SharedPreferences prefs = await _prefs;
 
-      prefs.setInt(key_codigo_expositor, user.id);
-      prefs.setString(key_nome_expositor, user.nome);
-      prefs.setString(key_razao_expositor, user.razaosocial);
-      prefs.setString(key_cidade_expositor, user.cidade);
-      prefs.setString(key_cnpj_expositor, user.cnpj);
+      prefs.setInt(key_codigo_expositor, user!.id!);
+      prefs.setString(key_nome_expositor, user!.nome!);
+      prefs.setString(key_razao_expositor, user!.razaosocial!);
+      prefs.setString(key_cidade_expositor, user!.cidade!);
+      prefs.setString(key_cnpj_expositor, user!.cnpj!);
     }
   }
 
   @action
-  logoutUser() async{
+  logoutUser() async {
     setUser(null);
 
     Future<SharedPreferences> _prefs = SharedPreferences.getInstance();

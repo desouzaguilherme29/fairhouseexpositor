@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 class SignUpButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return FlatButton(
-      padding: EdgeInsets.only(top: 160),
-      onPressed: () {}, child: null,
+    return ElevatedButton(
+      //padding: EdgeInsets.only(top: 160),
+      onPressed: () {},
+      child: Container(),
       /*child: Text(
         "Não possui uma conta? Cadastre-se",
         textAlign: TextAlign.center,

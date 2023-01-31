@@ -6,7 +6,11 @@ class PageTile extends StatelessWidget {
   final VoidCallback onTap;
   final bool highlighted;
 
-  PageTile({this.label, this.iconData, this.onTap, this.highlighted});
+  PageTile(
+      {required this.label,
+      required this.iconData,
+      required this.onTap,
+      required this.highlighted});
 
   @override
   Widget build(BuildContext context) {
@@ -14,11 +18,10 @@ class PageTile extends StatelessWidget {
       title: Text(
         label,
         style: TextStyle(
-          color: highlighted ? Colors.black : Colors.black.withAlpha(90),
-          fontWeight: FontWeight.w700,
-          fontFamily: "WorkSansMedium",
-          fontSize: 16
-        ),
+            color: highlighted ? Colors.black : Colors.black.withAlpha(90),
+            fontWeight: FontWeight.w700,
+            fontFamily: "WorkSansMedium",
+            fontSize: 16),
       ),
       leading: Icon(
         iconData,

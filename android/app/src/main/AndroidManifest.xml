@@ -8,9 +8,11 @@
     <uses-feature android:name="android.hardware.camera.flash" />
 
    <application
+        android:name="${applicationName}"
         android:label="FairHouse Expositor"
         android:icon="@mipmap/ic_launcher"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        android:requestLegacyExternalStorage="true">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

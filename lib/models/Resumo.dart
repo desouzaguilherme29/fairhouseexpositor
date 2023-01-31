@@ -1,14 +1,14 @@
 class Resumo {
-  int visitandoAgora;
-  int jaPassaramPeloEvento;
-  int pessoasVisitaramSeuStand;
-  int cadastrados;
+  int? visitandoAgora;
+  int? jaPassaramPeloEvento;
+  int? pessoasVisitaramSeuStand;
+  int? cadastrados;
 
   Resumo(
-      {this.visitandoAgora,
-      this.jaPassaramPeloEvento,
-      this.pessoasVisitaramSeuStand,
-      this.cadastrados});
+      {required this.visitandoAgora,
+      required this.jaPassaramPeloEvento,
+      required this.pessoasVisitaramSeuStand,
+      required this.cadastrados});
 
   Resumo.fromJson(Map<String, dynamic> json) {
     visitandoAgora = json['visitando_agora'];

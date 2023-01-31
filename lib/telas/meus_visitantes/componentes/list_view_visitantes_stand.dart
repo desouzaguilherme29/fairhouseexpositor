@@ -4,8 +4,9 @@ import 'package:fairhouseexpositor/stores/visitante_stand.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_it/get_it.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:fairhouseexpositor/extensions/extensions.dart';
+
+import '../../../globais/global_functions.dart';
 
 VisitanteStandStore visitanteStore = GetIt.I<VisitanteStandStore>();
 UserManagerStore _user = GetIt.I<UserManagerStore>();
@@ -94,14 +95,15 @@ Widget _singleItemWidget(VisitanteStand visitante, BuildContext context) {
                   ),
                   GestureDetector(
                     onTap: () async {
-                      var url = "whatsapp://send?phone=+55${visitante.celular}&text=Muito Obrigado por Visitar nosso Stand, Nós da ${_user.user.nome.toLowerCase().capitalizeFirstofEach} ficamos honrados com sua presença!";
-
-                      if (await canLaunch(url)) {
-                      await launch(url);
-                      }
+                      chamarWhats(
+                        number: visitante.celular!,
+                        text:
+                            "Muito Obrigado por Visitar nosso Stand, Nós da ${_user.user!.nome!.toLowerCase().capitalizeFirstofEach} ficamos honrados com sua presença!",
+                      );
                     },
                     child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                       child: Icon(
                         FontAwesomeIcons.whatsapp,
                         color: Colors.green,

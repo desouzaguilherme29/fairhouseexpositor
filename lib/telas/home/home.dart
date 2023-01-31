@@ -1,15 +1,18 @@
 import 'dart:convert';
-
+import 'dart:io';
+import 'package:cool_alert/cool_alert.dart';
+import 'package:fairhouseexpositor/componentes/components.dart';
 import 'package:fairhouseexpositor/componentes/drawer/drawer.dart';
 import 'package:fairhouseexpositor/models/Visitante.dart';
 import 'package:fairhouseexpositor/models/url_service.dart';
+import 'package:fairhouseexpositor/telas/qr_reader/qr_reader.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:super_qr_reader/super_qr_reader.dart';
 import 'package:http/http.dart' as http;
-import 'package:sweetalert/sweetalert.dart';
+import 'package:qr_code_scanner/qr_code_scanner.dart';
 
-Visitante visitante = null;
+Visitante? visitante = null;
 
 class Home extends StatefulWidget {
   @override
@@ -89,47 +92,12 @@ class _HomeState extends State<Home> {
                   Container(
                     margin: EdgeInsets.symmetric(vertical: 5),
                     height: 50,
-                    child: RaisedButton(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25)),
-                      color: Colors.orange,
-                      disabledColor: Colors.orange.withAlpha(120),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            FontAwesomeIcons.qrcode,
-                            color: Colors.white,
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            "Ler",
-                            style: TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white,
-                              fontFamily: "WorkSansMedium",
-                            ),
-                          )
-                        ],
-                      ),
-                      onPressed: () async {
-                        String results = await Navigator.push(
-                          // waiting for the scan results
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ScanView(
-                              centeredText: "Aponte para o QR-Code",
-                            ), // open the scan view
-                          ),
-                        );
-                        if (results != null) {
-                          _getVisitante(results);
-                        }
-                      },
+                    child: customElevatedButton(
+                      context,
+                      "Ler",
+                      Colors.orange,
+                      Colors.orange.withAlpha(120),
+                      _leVisitante,
                     ),
                   ),
                   SizedBox(
@@ -138,34 +106,12 @@ class _HomeState extends State<Home> {
                   Container(
                     margin: EdgeInsets.symmetric(vertical: 5),
                     height: 50,
-                    child: RaisedButton(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25)),
-                      color: Colors.orange,
-                      disabledColor: Colors.orange.withAlpha(120),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            FontAwesomeIcons.save,
-                            color: Colors.white,
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            "Gravar",
-                            style: TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white,
-                              fontFamily: "WorkSansMedium",
-                            ),
-                          ),
-                        ],
-                      ),
-                      onPressed: visitante != null ? _gravaVisita : null,
+                    child: customElevatedButton(
+                      context,
+                      "Gravar",
+                      Colors.orange,
+                      Colors.orange.withAlpha(120),
+                      visitante != null ? _gravaVisita : null,
                     ),
                   )
                 ],
@@ -229,42 +175,56 @@ class _HomeState extends State<Home> {
   }
 
   _atualizaTela() {
-    _controllerNome.text = visitante.nome;
-    _controllerFantasia.text = visitante.fantasia;
-    _controllerRazaoSocial.text = visitante.razaosocial;
-    _controllerCidade.text = visitante.cidade;
-    _controllerTipo.text = visitante.tipo;
+    _controllerNome.text = visitante!.nome!;
+    _controllerFantasia.text = visitante!.fantasia!;
+    _controllerRazaoSocial.text = visitante!.razaosocial!;
+    _controllerCidade.text = visitante!.cidade!;
+    _controllerTipo.text = visitante!.tipo!;
   }
 
   Future _gravaVisita() async {
     http.Response response;
-    var url = getUrlGravarVisitaStand(visitante.id.toString());
+    var url = getUrlGravarVisitaStand(visitante!.id.toString());
 
     response = await http.get(url);
 
     if (response.statusCode == 200) {
       if (response.body.toString() == "1") {
-        SweetAlert.show(context,
-            title: "Visita gravada!",
-            subtitle: "Visita registrada com sucesso",
-            style: SweetAlertStyle.success);
+        CoolAlert.show(
+            context: context,
+            type: CoolAlertType.success,
+            text: "Visita registrada com sucesso",
+            title: "Visita gravada!");
 
         setState(() {
           visitante = null;
         });
       } else {
-        SweetAlert.show(
-          context,
-          title: "Ops, algo deu errado!",
-          subtitle: response.body.toString(),
-          style: SweetAlertStyle.error,
-        );
+        CoolAlert.show(
+            context: context,
+            type: CoolAlertType.error,
+            text: "Ops, algo deu errado!",
+            title: "Problemas!");
       }
     } else {
-      SweetAlert.show(context,
-          title: "Servidor inacessível",
-          subtitle: "Tente novamente",
-          style: SweetAlertStyle.error);
+      CoolAlert.show(
+          context: context,
+          type: CoolAlertType.error,
+          text: "Servidor inacessível",
+          title: "Tente novamente!");
+    }
+  }
+
+  _leVisitante() async {
+    String result = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const QRViewExample(),
+      ),
+    );
+
+    if (result.isNotEmpty) {
+      _getVisitante(result);
     }
   }
 }

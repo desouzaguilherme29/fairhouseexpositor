@@ -2,12 +2,14 @@ import 'package:fairhouseexpositor/telas/login/widgets/input_field.dart';
 import 'package:flutter/material.dart';
 
 class FormContainer extends StatelessWidget {
-  TextEditingController controllerUser;
-  TextEditingController controllerPass;
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  TextEditingController? controllerUser;
+  TextEditingController? controllerPass;
+  GlobalKey<FormState>? formKey = GlobalKey<FormState>();
 
-  FormContainer({@required this.controllerUser, @required this.controllerPass, @required this.formKey});
-
+  FormContainer(
+      {@required this.controllerUser,
+      @required this.controllerPass,
+      @required this.formKey});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class FormContainer extends StatelessWidget {
               hint: "Usuário",
               obscure: false,
               icon: Icons.person_outline,
-              controller: controllerUser,
+              controller: controllerUser!,
               validateText: "Insira o Usuário",
               autoFocus: false,
             ),
@@ -29,7 +31,7 @@ class FormContainer extends StatelessWidget {
               hint: "Senha",
               obscure: true,
               icon: Icons.lock_outline,
-              controller: controllerPass,
+              controller: controllerPass!,
               validateText: "Insira sua Senha",
               autoFocus: false,
             )

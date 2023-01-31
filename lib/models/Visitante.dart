@@ -1,24 +1,24 @@
 class Visitante {
-  int id;
-  String nome;
-  String razaosocial;
-  String cnpj;
-  String cidade;
-  String email;
-  String telefone;
-  String tipo;
-  String pais;
-  bool tpLiberadoAcesso;
-  String foto;
-  String datacadastro;
-  bool tpEmail;
-  bool tpEtiqueta;
-  bool tpEntrada;
-  String celular;
-  String cpf;
-  String fantasia;
-  String evento;
-  int idMovPortaria;
+  int? id;
+  String? nome;
+  String? razaosocial;
+  String? cnpj;
+  String? cidade;
+  String? email;
+  String? telefone;
+  String? tipo;
+  String? pais;
+  bool? tpLiberadoAcesso;
+  String? foto;
+  String? datacadastro;
+  bool? tpEmail;
+  bool? tpEtiqueta;
+  bool? tpEntrada;
+  String? celular;
+  String? cpf;
+  String? fantasia;
+  String? evento;
+  int? idMovPortaria;
 
   Visitante(
       {this.id,

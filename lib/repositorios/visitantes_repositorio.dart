@@ -9,13 +9,13 @@ import 'package:fairhouseexpositor/stores/resumo_stand.dart';
 import 'package:http/http.dart' as http;
 
 class VisitanteRepositorio {
-  Future<List<VisitanteStand>> getListaVisitantesStand({String filtro}) async {
+  Future<List<VisitanteStand>> getListaVisitantesStand({String? filtro}) async {
     http.Response response;
     List<VisitanteStand> visitantes = [];
-var url = getUrlVisitantesStand(filtro);
+    var url = getUrlVisitantesStand(filtro!);
     response = await http.get(url);
     if (response.statusCode == 200) {
-      if (response.body.isEmpty){
+      if (response.body.isEmpty) {
         return [];
       }
       var values = json.decode(utf8.decode(response.bodyBytes));
@@ -37,7 +37,7 @@ var url = getUrlVisitantesStand(filtro);
     response = await http.get(url);
 
     if (response.statusCode == 200) {
-      if (response.body.isEmpty){
+      if (response.body.isEmpty) {
         return [];
       }
       var values = json.decode(utf8.decode(response.bodyBytes));
@@ -49,17 +49,17 @@ var url = getUrlVisitantesStand(filtro);
         return visitantes;
       }
     }
-print(visitantes);
+    print(visitantes);
     return [];
   }
 
-  Future<List<VisitanteFeira>> getListaVisitantesFeira({String filtro}) async {
+  Future<List<VisitanteFeira>> getListaVisitantesFeira({String? filtro}) async {
     http.Response response;
     List<VisitanteFeira> visitantes = [];
 
-    response = await http.get(getUrlVisitantesFeira(filtro));
+    response = await http.get(getUrlVisitantesFeira(filtro!));
     if (response.statusCode == 200) {
-      if (response.body.isEmpty){
+      if (response.body.isEmpty) {
         return [];
       }
       var values = json.decode(utf8.decode(response.bodyBytes));
@@ -79,7 +79,7 @@ print(visitantes);
     List<Resumo> visitantes = [];
     response = await http.get(getUrlResumo());
     if (response.statusCode == 200) {
-      if (response.body.isEmpty){
+      if (response.body.isEmpty) {
         return [];
       }
       var values = json.decode(utf8.decode(response.bodyBytes));

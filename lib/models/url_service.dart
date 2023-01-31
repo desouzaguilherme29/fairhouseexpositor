@@ -4,10 +4,10 @@ import 'package:get_it/get_it.dart';
 final UserManagerStore userManagerStore = GetIt.I<UserManagerStore>();
 
 getUrlServer() {
-  return "http://177.101.138.194:8083/bi/fair/";
+  return "http://3.92.2.39/app-fairhouse/";
 }
 
-getUrlLogin(String user, senha) {
+getUrlLogin(String? user, senha) {
   var url =
       getUrlServer() + "login.php" + "?usuario=" + user + "&senha=" + senha;
   return Uri.parse(url);
@@ -20,13 +20,13 @@ getUrlDadosVisitante(String id_visitante) {
 
 getUrlGravarVisitaStand(String id_visitante) {
   var url = getUrlServer() +
-      "gravarvisita.php?id_visitante=${id_visitante}&id_expositor=${userManagerStore.user.id}";
+      "gravarvisita.php?id_visitante=${id_visitante}&id_expositor=${userManagerStore.user!.id}";
   return Uri.parse(url);
 }
 
 getUrlVisitantesStand(String filtro) {
   var url =
-      getUrlServer() + "visitantesstand.php?id=${userManagerStore.user.id}";
+      getUrlServer() + "visitantesstand.php?id=${userManagerStore.user!.id}";
 
   if (filtro != null && filtro.trim().isNotEmpty) {
     url += "&filtro=" + filtro;
@@ -54,6 +54,16 @@ getUrlVisitantesHora() {
 }
 
 getUrlResumo() {
-  var url = getUrlServer() + "resumo.php/?id=${userManagerStore.user.id}";
+  var url = getUrlServer() + "resumo.php/?id=${userManagerStore.user!.id}";
+  return Uri.parse(url);
+}
+
+getUrlGravarSaida(int idVisitante) {
+  var url = getUrlServer() + "gravarsaida.php?id_visitante=$idVisitante";
+  return Uri.parse(url);
+}
+
+getUrlGravarEntrada(int idVisitante) {
+  var url = getUrlServer() + "gravarentrada.php?id_visitante=$idVisitante";
   return Uri.parse(url);
 }

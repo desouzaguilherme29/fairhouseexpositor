@@ -1,11 +1,10 @@
 class VisitanteFeira {
-  String cidade;
-  String nome;
-  String fantasia;
-  String celular;
+  String? cidade;
+  String? nome;
+  String? fantasia;
+  String? celular;
 
-  VisitanteFeira(
-      {this.cidade, this.nome, this.fantasia, this.celular});
+  VisitanteFeira({this.cidade, this.nome, this.fantasia, this.celular});
 
   VisitanteFeira.fromJson(Map<String, dynamic> json) {
     cidade = json['cidade'];

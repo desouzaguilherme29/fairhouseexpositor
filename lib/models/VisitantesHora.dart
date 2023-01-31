@@ -1,6 +1,6 @@
 class VisitantesHora {
-  String hora_entrada;
-  double qtde;
+  String? hora_entrada;
+  double? qtde;
 
   VisitantesHora({this.hora_entrada, this.qtde});
 

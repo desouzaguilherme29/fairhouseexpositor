@@ -1,8 +1,10 @@
+import 'package:fairhouseexpositor/stores/login_store.dart';
 import 'package:fairhouseexpositor/telas/base/base_screen.dart';
-import 'package:fairhouseexpositor/telas/login/widgets/form_container.dart';
-import 'package:fairhouseexpositor/telas/login/widgets/signupbottom.dart';
-import 'package:fairhouseexpositor/telas/login/widgets/stagger_animation.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:get_it/get_it.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -10,11 +12,13 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
-  AnimationController _animationController;
+  AnimationController? _animationController;
   TextEditingController _controllerUser = TextEditingController();
   TextEditingController _controllerPass = TextEditingController();
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final GlobalKey<ScaffoldState> _scaffoldkey = GlobalKey<ScaffoldState>();
+  bool _obscureText = true;
+  LoginStore loginStore = GetIt.I<LoginStore>();
 
   @override
   void initState() {
@@ -22,7 +26,7 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
     _animationController =
         AnimationController(vsync: this, duration: Duration(seconds: 2));
 
-    _animationController.addStatusListener((status) {
+    _animationController!.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (context) => BaseScreen()));
@@ -32,71 +36,228 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
 
   @override
   void dispose() {
-    _animationController.dispose();
+    _animationController!.dispose();
     super.dispose();
+  }
+
+  Widget _loginBtn() {
+    return Container(
+      width: !loginStore.loading ? double.infinity : 90,
+      margin: EdgeInsets.only(top: 20, bottom: 30),
+      decoration: BoxDecoration(
+        color: Colors.orange,
+        borderRadius: BorderRadius.all(Radius.circular(50)),
+        boxShadow: loginStore.loginPressed == null
+            ? null
+            : [
+                BoxShadow(
+                  color: Colors.orange,
+                  blurRadius: 10,
+                  offset: Offset(0, 5),
+                  spreadRadius: 0,
+                ),
+              ],
+      ),
+      child: ElevatedButton(
+        onPressed: loginStore.loginPressed == null
+            ? () => EasyLoading.showInfo("Informe todos os campos!")
+            : () => {
+                  loginStore.loginPressed!().then(
+                    (login) {
+                      if (login) {
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (context) => BaseScreen(),
+                          ),
+                        );
+                      }
+                    },
+                  )
+                },
+        style: ButtonStyle(
+          padding: MaterialStateProperty.resolveWith<EdgeInsetsGeometry>(
+            (Set<MaterialState> states) {
+              return EdgeInsets.all(25);
+            },
+          ),
+          shape: MaterialStateProperty.resolveWith<RoundedRectangleBorder>(
+            (Set<MaterialState> states) {
+              return RoundedRectangleBorder(
+                borderRadius: !loginStore.loading
+                    ? BorderRadius.all(Radius.circular(38.0))
+                    : BorderRadius.all(Radius.circular(50.0)),
+              );
+            },
+          ),
+          backgroundColor: MaterialStateProperty.resolveWith<Color>(
+            (Set<MaterialState> states) {
+              if (loginStore.loginPressed == null)
+                return Colors.orange.shade200;
+              else
+                return Colors.orange;
+            },
+          ),
+        ),
+        child: loginStore.loading
+            ? CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+              )
+            : Text(
+                "ENTRAR",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w800,
+                  color: Colors.white,
+                  letterSpacing: 3,
+                  fontFamily: "WorkSansMedium",
+                ),
+              ),
+      ),
+    );
+  }
+
+  Widget _inputField({
+    required Icon prefixIcon,
+    required String hintText,
+    required bool isPassword,
+    required bool enabled,
+    required Function(String) onChanged,
+    required TextInputType keyboardType,
+    String? errorText,
+    List<TextInputFormatter>? inputFormatters,
+    Widget? suffixIcon,
+    String? initialValue,
+    TextEditingController? controller,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 5),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(
+            Radius.circular(50),
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black,
+              blurRadius: 25,
+              offset: Offset(0, 5),
+              spreadRadius: -25,
+            ),
+          ],
+        ),
+        margin: EdgeInsets.only(bottom: 20),
+        child: TextFormField(
+          controller: controller,
+          initialValue: initialValue,
+          obscureText: isPassword,
+          keyboardType: keyboardType,
+          onChanged: onChanged,
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w400,
+            color: Color(0xff000912),
+          ),
+          decoration: InputDecoration(
+            errorText: errorText,
+            contentPadding: EdgeInsets.symmetric(
+              vertical: 25,
+              horizontal: 5,
+            ),
+            hintText: hintText,
+            hintStyle: TextStyle(
+              color: Color(0xffA6B0BD),
+            ),
+            fillColor: Colors.white,
+            filled: true,
+            prefixIcon: prefixIcon,
+            suffixIcon: suffixIcon,
+            prefixIconConstraints: BoxConstraints(
+              minWidth: 65,
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(50),
+              ),
+              borderSide: BorderSide(color: Colors.white),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(50),
+              ),
+              borderSide: BorderSide(color: Colors.white),
+            ),
+          ),
+          inputFormatters: inputFormatters,
+        ),
+      ),
+    );
+  }
+
+  Widget _logo(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(top: 50, bottom: 10),
+      height: MediaQuery.of(context).size.height * 0.35,
+      child: Image.asset("imagens/logo_fairhouse.png"),
+    );
+  }
+
+  void _toggleText() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldkey,
-      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
-      body: Container(
-        decoration: BoxDecoration(
-            color: Colors.black45),
-        child: ListView(
-          padding: EdgeInsets.all(0),
-          children: <Widget>[
-            Stack(
-              alignment: Alignment.bottomCenter,
-              children: <Widget>[
-                Container(
-                  margin: EdgeInsets.only(bottom: 80, left: 15, right: 15),
-                  height: 260,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(25),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black26,
-                          blurRadius: 2.0,
-                          spreadRadius: 2.0,
-                          offset: Offset(
-                            2.0, // horizontal, move right 10
-                            2.0, // vertical, move down 10
-                          ),
-                        )
-                      ]),
+      backgroundColor: Colors.black87,
+      body: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          width: double.infinity,
+          child: Column(
+            children: [
+              _logo(context),
+              _inputField(
+                initialValue: loginStore.usuario,
+                enabled: !loginStore.loading,
+                errorText: loginStore.usuarioError,
+                hintText: "CNPJ",
+                isPassword: false,
+                keyboardType: TextInputType.number,
+                onChanged: loginStore.setUsuario,
+                prefixIcon: Icon(
+                  Icons.person,
+                  size: 30,
+                  color: Colors.black87,
                 ),
-                Column(
-                  children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.only(top: 50, bottom: 32),
-                      child: Image.asset(
-                        "imagens/logo_fairhouse.png",
-                        width: 600,
-                        height: 250,
-                        fit: BoxFit.contain,
-                      ),
-                    ),
-                    FormContainer(
-                      controllerUser: _controllerUser,
-                      controllerPass: _controllerPass,
-                      formKey: _formKey,
-                    ),
-                    SignUpButton()
-                  ],
+              ),
+              _inputField(
+                enabled: !loginStore.loading,
+                errorText: loginStore.senhaError,
+                hintText: "Senha",
+                isPassword: _obscureText,
+                keyboardType: TextInputType.text,
+                onChanged: loginStore.setSenha,
+                prefixIcon: Icon(
+                  Icons.lock_outline,
+                  size: 30,
+                  color: Colors.black87,
                 ),
-                StaggerAnimation(
-                  controller: _animationController.view,
-                  controllerUser: _controllerUser,
-                  controllerPass: _controllerPass,
-                  formKey: _formKey,
-                  scaffoldkey: _scaffoldkey,
+                suffixIcon: GestureDetector(
+                  onTap: _toggleText,
+                  child: Icon(
+                    _obscureText
+                        ? FontAwesomeIcons.eye
+                        : FontAwesomeIcons.eyeSlash,
+                    size: 20.0,
+                    color: Colors.black,
+                  ),
                 ),
-              ],
-            )
-          ],
+              ),
+              _loginBtn(),
+            ],
+          ),
         ),
       ),
     );

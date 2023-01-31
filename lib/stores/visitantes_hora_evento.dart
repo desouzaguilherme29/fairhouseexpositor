@@ -6,12 +6,13 @@ part 'visitantes_hora_evento.g.dart';
 
 class VisitantesHoraEvento = _VisitantesHoraEvento with _$VisitantesHoraEvento;
 
-abstract class _VisitantesHoraEvento with Store{
+abstract class _VisitantesHoraEvento with Store {
   _VisitantesHoraEvento() {
     loadVisitantes();
   }
 
-  ObservableList<VisitantesHora> visitanteListHora = ObservableList<VisitantesHora>();
+  ObservableList<VisitantesHora> visitanteListHora =
+      ObservableList<VisitantesHora>();
 
   @action
   void setVisitantes(List<VisitantesHora> visitante) {
@@ -26,7 +27,7 @@ abstract class _VisitantesHoraEvento with Store{
   void setLoading(bool value) => loading = value;
 
   @observable
-  String error;
+  String? error;
 
   @action
   void setError(value) => error = value;
@@ -39,11 +40,11 @@ abstract class _VisitantesHoraEvento with Store{
 
       loading = false;
       error = null;
-      return true;
+      //return true;
     } catch (e) {
       error = e.toString();
       loading = false;
-      return false;
+      //return false;
     }
   }
 }

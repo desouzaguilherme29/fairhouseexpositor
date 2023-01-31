@@ -1,16 +1,16 @@
 class Usuario {
-  int id;
-  String nome;
-  String razaosocial;
-  String cnpj;
-  String cidade;
-  String email;
-  String telefone;
-  String pais;
-  bool tpAtivo;
-  String datacadastro;
-  String login;
-  String senha;
+  int? id;
+  String? nome;
+  String? razaosocial;
+  String? cnpj;
+  String? cidade;
+  String? email;
+  String? telefone;
+  String? pais;
+  bool? tpAtivo;
+  String? datacadastro;
+  String? login;
+  String? senha;
 
   Usuario(
       {this.id,

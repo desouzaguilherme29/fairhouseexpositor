@@ -9,7 +9,6 @@ import 'package:get_it/get_it.dart';
 class MeusVisitantes extends StatelessWidget {
   VisitanteStandStore visitantes = GetIt.I<VisitanteStandStore>();
 
-
   abrePesquisa(BuildContext context) async {
     final texto = await showDialog(
         context: context, builder: (_) => DialogPesquisa(visitantes.pesquisa));
@@ -35,7 +34,9 @@ class MeusVisitantes extends StatelessWidget {
                   return Container(
                     width: constraits.biggest.width,
                     child: Text(
-                      visitantes.pesquisa == "" ? "Visitantes Stand" : visitantes.pesquisa,
+                      visitantes.pesquisa == ""
+                          ? "Visitantes Stand"
+                          : visitantes.pesquisa,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontFamily: "WorkSansMedium",
@@ -66,83 +67,82 @@ class MeusVisitantes extends StatelessWidget {
             })
           ],
         ),
-        body: Column(
-          children: [
-            Expanded(
-              child: Observer(builder: (_) {
-                if (visitantes.error != null) {
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.error_outline_outlined,
-                        color: Colors.white,
-                        size: 80,
-                      ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      Text(
-                        "Ocorreu um erro! \n${visitantes.error}",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                          fontFamily: "WorkSansMedium",
-                        ),
-                      )
-                    ],
-                  );
-                } else if (visitantes.loading) {
-                  return Center(
-                    child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation(Colors.white),
-                    ),
-                  );
-                } else if (visitantes.visitanteList.isEmpty) {
-                  return Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.mood_bad_outlined,
-                          color: Colors.white,
-                          size: 80,
-                        ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        Text(
-                          "Não há resultados...",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
+        body: RefreshIndicator(
+          onRefresh: visitantes.loadVisitantes,
+          child: Column(
+            children: [
+              Expanded(
+                child: Container(
+                  margin: EdgeInsets.symmetric(horizontal: 5),
+                  child: Observer(builder: (_) {
+                    if (visitantes.error != null) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.error_outline_outlined,
                             color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
-                            fontFamily: "WorkSansMedium",
+                            size: 80,
                           ),
-                        )
-                      ],
-                    ),
-                  );
-                } else {
-                  return RefreshIndicator(
-                    onRefresh: visitantes.loadVisitantes,
-                    child: Container(
-                      margin: EdgeInsets.symmetric(horizontal: 5),
-                      child: ListViewVisitantesStand(),
-                    ),
-                  );
-                }
-              }),
-            ),
-          ],
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          Text(
+                            "Ocorreu um erro! \n${visitantes.error}",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w700,
+                              fontFamily: "WorkSansMedium",
+                            ),
+                          )
+                        ],
+                      );
+                    } else if (visitantes.loading) {
+                      return Center(
+                        child: CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation(Colors.white),
+                        ),
+                      );
+                    } else if (visitantes.visitanteList.isEmpty) {
+                      return Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.mood_bad_outlined,
+                              color: Colors.white,
+                              size: 80,
+                            ),
+                            const SizedBox(
+                              height: 8,
+                            ),
+                            Text(
+                              "Não há resultados...",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w700,
+                                fontFamily: "WorkSansMedium",
+                              ),
+                            )
+                          ],
+                        ),
+                      );
+                    } else {
+                      return ListViewVisitantesStand();
+                    }
+                  }),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 }
-

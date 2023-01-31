@@ -1,7 +1,6 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:fairhouseexpositor/globais/global_statics.dart';
-import 'package:fairhouseexpositor/models/VisitantesHora.dart';
-import 'package:fairhouseexpositor/models/url_service.dart';
+import 'package:fairhouseexpositor/stores/login_store.dart';
 import 'package:fairhouseexpositor/stores/page_store.dart';
 import 'package:fairhouseexpositor/stores/resumo_stand.dart';
 import 'package:fairhouseexpositor/stores/user_manager_store.dart';
@@ -13,24 +12,34 @@ import 'package:fairhouseexpositor/telas/login/login.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await setupLocators();
+  setupLocators();
   runApp(MyApp());
+  configLoading();
 }
 
 void setupLocators() async {
   GetIt.I.registerSingleton(PageStore());
-  await GetIt.I.registerSingleton(UserManagerStore());
+  GetIt.I.registerSingleton(UserManagerStore());
   await Future.delayed(Duration(seconds: 5));
   GetIt.I.registerSingleton(VisitanteStandStore());
   GetIt.I.registerSingleton(VisitantesFeira());
   GetIt.I.registerSingleton(VisitantesHoraEvento());
   GetIt.I.registerSingleton(ResumoStand());
+  GetIt.I.registerSingleton(LoginStore());
+}
+
+void configLoading() {
+  EasyLoading.instance
+    ..displayDuration = const Duration(milliseconds: 1500)
+    ..indicatorType = EasyLoadingIndicatorType.fadingCircle
+    ..loadingStyle = EasyLoadingStyle.light
+    ..backgroundColor = Colors.grey;
 }
 
 class MyApp extends StatelessWidget {
@@ -39,12 +48,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      builder: EasyLoading.init(),
       debugShowCheckedModeBanner: false,
       title: "FairHouse Expositores",
       theme: ThemeData(
         appBarTheme: AppBarTheme(
           elevation: 0,
-          backgroundColor: Colors.black45,
+          backgroundColor: Colors.black,
           centerTitle: true,
           titleTextStyle: TextStyle(
             fontWeight: FontWeight.w600,
@@ -52,7 +62,7 @@ class MyApp extends StatelessWidget {
             fontFamily: "WorkSansMedium",
           ),
         ),
-        scaffoldBackgroundColor: Colors.black45,
+        scaffoldBackgroundColor: Colors.black,
       ),
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,

@@ -6,16 +6,14 @@ part 'visitante_stand.g.dart';
 
 class VisitanteStandStore = _VisitanteStandStore with _$VisitanteStandStore;
 
-abstract class _VisitanteStandStore with Store{
-
-  _VisitanteStandStore(){
+abstract class _VisitanteStandStore with Store {
+  _VisitanteStandStore() {
     autorun((_) async {
       setLoading(true);
-      try{
+      try {
         visitanteList.clear();
-        final visitantes = await VisitanteRepositorio().getListaVisitantesStand(
-            filtro : pesquisa
-        );
+        final visitantes = await VisitanteRepositorio()
+            .getListaVisitantesStand(filtro: pesquisa);
 
         visitanteList.clear();
         if (visitantes.isNotEmpty) {
@@ -23,13 +21,14 @@ abstract class _VisitanteStandStore with Store{
         }
         setError(null);
         setLoading(false);
-      } catch (e){
+      } catch (e) {
         error = e.toString();
       }
     });
   }
 
-  ObservableList<VisitanteStand> visitanteList = ObservableList<VisitanteStand>();
+  ObservableList<VisitanteStand> visitanteList =
+      ObservableList<VisitanteStand>();
 
   @action
   void setVisitantes(List<VisitanteStand> visitante) {
@@ -44,7 +43,7 @@ abstract class _VisitanteStandStore with Store{
   void setLoading(bool value) => loading = value;
 
   @observable
-  String error;
+  String? error;
 
   @action
   void setError(value) => error = value;
@@ -59,18 +58,17 @@ abstract class _VisitanteStandStore with Store{
     loading = true;
     try {
       final visitantes = await VisitanteRepositorio().getListaVisitantesStand(
-          filtro : pesquisa,
+        filtro: pesquisa,
       );
       setVisitantes(visitantes);
 
       loading = false;
       error = null;
-      return true;
+      //return true;
     } catch (e) {
       error = e.toString();
       loading = false;
-      return false;
+      //return false;
     }
   }
-
 }

@@ -12,18 +12,18 @@ class CustomDrawerHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.of(context).pop();
-        if (userManagerStore.isLoggedIn) {
-          GetIt.I<PageStore>().setPage(6);
-        } else {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (_) => Login(),
-            ),
-          );
-        }
-      },
+      // onTap: () {
+      //   Navigator.of(context).pop();
+      //   if (userManagerStore.isLoggedIn) {
+      //     GetIt.I<PageStore>().setPage(6);
+      //   } else {
+      //     Navigator.of(context).push(
+      //       MaterialPageRoute(
+      //         builder: (_) => Login(),
+      //       ),
+      //     );
+      //   }
+      // },
       child: Container(
         height: 95,
         padding: EdgeInsets.symmetric(horizontal: 20),
@@ -46,7 +46,9 @@ class CustomDrawerHeader extends StatelessWidget {
                   children: [
                     Text(
                       userManagerStore.isLoggedIn
-                          ? userManagerStore.user.nome.toLowerCase().capitalizeFirstofEach
+                          ? userManagerStore.user!.nome!
+                              .toLowerCase()
+                              .capitalizeFirstofEach
                           : "Acesse sua conta agora!",
                       style: TextStyle(
                         color: Colors.orange,
@@ -58,7 +60,9 @@ class CustomDrawerHeader extends StatelessWidget {
                     ),
                     Text(
                       userManagerStore.isLoggedIn
-                          ? userManagerStore.user.razaosocial.toLowerCase().capitalizeFirstofEach
+                          ? userManagerStore.user!.razaosocial!
+                              .toLowerCase()
+                              .capitalizeFirstofEach
                           : "Clique Aqui",
                       style: TextStyle(
                         color: Colors.orange,
