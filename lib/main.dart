@@ -24,6 +24,7 @@ Future<void> main() async {
 }
 
 void setupLocators() async {
+  GetIt.I.registerSingleton(LoginStore());
   GetIt.I.registerSingleton(PageStore());
   GetIt.I.registerSingleton(UserManagerStore());
   await Future.delayed(Duration(seconds: 5));
@@ -31,7 +32,6 @@ void setupLocators() async {
   GetIt.I.registerSingleton(VisitantesFeira());
   GetIt.I.registerSingleton(VisitantesHoraEvento());
   GetIt.I.registerSingleton(ResumoStand());
-  GetIt.I.registerSingleton(LoginStore());
 }
 
 void configLoading() {

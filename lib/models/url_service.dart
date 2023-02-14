@@ -4,7 +4,7 @@ import 'package:get_it/get_it.dart';
 final UserManagerStore userManagerStore = GetIt.I<UserManagerStore>();
 
 getUrlServer() {
-  return "http://3.92.2.39/app-fairhouse/";
+  return "http://3.214.254.206/app-fairhouse/";
 }
 
 getUrlLogin(String? user, senha) {
