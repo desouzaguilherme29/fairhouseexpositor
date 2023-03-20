@@ -265,10 +265,10 @@ class _PortariaState extends State<Portaria> {
         });
       } else {
         CoolAlert.show(
-          context: context,
-          type: CoolAlertType.error,
-          title: "Ops, algo deu errado!",
-        );
+            context: context,
+            type: CoolAlertType.error,
+            title: "Ops, algo deu errado!",
+            text: response.body.toString());
       }
     } else {
       CoolAlert.show(

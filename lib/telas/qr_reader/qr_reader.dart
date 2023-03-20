@@ -71,6 +71,9 @@ class _QRViewExampleState extends State<QRViewExample> {
         if (Platform.isAndroid) {
           controller.pauseCamera();
         }
+
+        if (Platform.isIOS) controller.stopCamera();
+
         controller.resumeCamera();
         Navigator.pop(context, result?.code);
       }

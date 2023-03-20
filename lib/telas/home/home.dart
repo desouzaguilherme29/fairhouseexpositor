@@ -12,7 +12,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
-Visitante? visitante = null;
+Visitante? visitante = Visitante();
 
 class Home extends StatefulWidget {
   @override
@@ -165,7 +165,8 @@ class _HomeState extends State<Home> {
         values.forEach((element) {
           print(element.toString());
           setState(() {
-            visitante = Visitante.fromJson(element);
+            var x = Visitante.fromJson(element);
+            visitante = x;
           });
         });
 
@@ -224,7 +225,7 @@ class _HomeState extends State<Home> {
     );
 
     if (result.isNotEmpty) {
-      _getVisitante(result);
+      await _getVisitante(result);
     }
   }
 }

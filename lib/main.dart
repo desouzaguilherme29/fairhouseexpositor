@@ -24,14 +24,13 @@ Future<void> main() async {
 }
 
 void setupLocators() async {
+  GetIt.I.registerSingleton(UserManagerStore());
   GetIt.I.registerSingleton(LoginStore());
   GetIt.I.registerSingleton(PageStore());
-  GetIt.I.registerSingleton(UserManagerStore());
-  await Future.delayed(Duration(seconds: 5));
-  GetIt.I.registerSingleton(VisitanteStandStore());
   GetIt.I.registerSingleton(VisitantesFeira());
   GetIt.I.registerSingleton(VisitantesHoraEvento());
   GetIt.I.registerSingleton(ResumoStand());
+  GetIt.I.registerSingleton(VisitanteStandStore());
 }
 
 void configLoading() {
