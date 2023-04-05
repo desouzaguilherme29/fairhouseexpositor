@@ -12,7 +12,7 @@ Future<bool> chamarWhats({required String text, required String number}) async {
           .replaceAll(')', '')
           .replaceAll('(', '')
           .trim();
-  var whatsappURlAndroid = "whatsapp://send?phone=" + whatsapp + "&text=$text";
+  var whatsappURlAndroid = "whatsapp://send?phone=+" + whatsapp + "&text=$text";
   var whatsappURLIos = "https://wa.me/$whatsapp?text=$text";
   print(whatsappURLIos);
   if (Platform.isIOS) {
@@ -22,7 +22,7 @@ Future<bool> chamarWhats({required String text, required String number}) async {
       ));
       return true;
     } else {
-      EasyLoading.showInfo("Whatsapp não instalado!");
+      //EasyLoading.showInfo("Whatsapp não instalado!");
       return false;
     }
   } else {
@@ -30,7 +30,7 @@ Future<bool> chamarWhats({required String text, required String number}) async {
       await launchUrl(Uri.parse(whatsappURlAndroid));
       return true;
     } else {
-      EasyLoading.showInfo("Whatsapp não instalado!");
+      //EasyLoading.showInfo("Whatsapp não instalado!");
       return false;
     }
   }

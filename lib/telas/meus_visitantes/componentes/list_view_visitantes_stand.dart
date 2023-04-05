@@ -2,6 +2,7 @@ import 'package:fairhouseexpositor/models/VisitanteStand.dart';
 import 'package:fairhouseexpositor/stores/user_manager_store.dart';
 import 'package:fairhouseexpositor/stores/visitante_stand.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_it/get_it.dart';
 import 'package:fairhouseexpositor/extensions/extensions.dart';
@@ -99,7 +100,11 @@ Widget _singleItemWidget(VisitanteStand visitante, BuildContext context) {
                         number: visitante.celular!,
                         text:
                             "Muito Obrigado por Visitar nosso Stand, Nós da ${_user.user!.nome!.toLowerCase().capitalizeFirstofEach} ficamos honrados com sua presença!",
-                      );
+                      ).then((value) {
+                        if (!value) {
+                          EasyLoading.showInfo("Whatsapp não instalado!");
+                        }
+                      });
                     },
                     child: Padding(
                       padding:

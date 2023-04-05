@@ -2,6 +2,7 @@ import 'package:fairhouseexpositor/models/VisitanteFeira.dart';
 import 'package:fairhouseexpositor/stores/user_manager_store.dart';
 import 'package:fairhouseexpositor/stores/visitantes_feira.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_it/get_it.dart';
 import 'package:fairhouseexpositor/extensions/extensions.dart';
@@ -96,10 +97,14 @@ Widget _singleItemWidget(VisitanteFeira visitante, BuildContext context) {
                   GestureDetector(
                     onTap: () async {
                       chamarWhats(
-                        number: visitante.celular!,
-                        text:
-                            "Olá, Notei que Você esta visitando a FairHouse, Venha nos visitar no nosso stand! Att. ${_user.user!.nome!.toLowerCase().capitalizeFirstofEach}.",
-                      );
+                              number: visitante.celular!,
+                              text:
+                                  "Olá, Notei que Você esta visitando a FairHouse, Venha nos visitar no nosso stand! Att. ${_user.user!.nome!.toLowerCase().capitalizeFirstofEach}.")
+                          .then((value) {
+                        if (!value) {
+                          EasyLoading.showInfo("Whatsapp não instalado!");
+                        }
+                      });
                     },
                     child: Padding(
                       padding:
