@@ -246,30 +246,30 @@ class _PortariaState extends State<Portaria> {
     Uri url;
     if (GlobalStatics.entrada) {
       url = getUrlGravarEntrada(visitante!.id!);
+      response = await http.put(url);
     } else {
       url = getUrlGravarSaida(visitante!.id!);
+      response = await http.patch(url);
     }
-    response = await http.get(url);
 
     if (response.statusCode == 200) {
-      if (response.body.toString() == "1") {
-        CoolAlert.show(
-          context: context,
-          type: CoolAlertType.success,
-          text: GlobalStatics.entrada ? "Entrada Liberada" : "Saída Liberada",
-          title: GlobalStatics.entrada ? "Bem-Vindo" : "Até Logo",
-        );
+      CoolAlert.show(
+        context: context,
+        type: CoolAlertType.success,
+        text: GlobalStatics.entrada ? "Entrada Liberada" : "Saída Liberada",
+        title: GlobalStatics.entrada ? "Bem-Vindo" : "Até Logo",
+      );
 
-        setState(() {
-          visitante = null;
-        });
-      } else {
-        CoolAlert.show(
-            context: context,
-            type: CoolAlertType.error,
-            title: "Ops, algo deu errado!",
-            text: response.body.toString());
-      }
+      setState(() {
+        visitante = null;
+      });
+    } else if (response.statusCode == 500) {
+      var value = json.decode(response.body);
+      CoolAlert.show(
+          context: context,
+          type: CoolAlertType.error,
+          title: "Ops, algo deu errado!",
+          text: value["message"]);
     } else {
       CoolAlert.show(
           context: context,

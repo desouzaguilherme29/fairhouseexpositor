@@ -187,32 +187,33 @@ class _HomeState extends State<Home> {
     http.Response response;
     var url = getUrlGravarVisitaStand(visitante!.id.toString());
 
-    response = await http.get(url);
+    response = await http.post(url);
 
     if (response.statusCode == 200) {
-      if (response.body.toString() == "1") {
-        CoolAlert.show(
-            context: context,
-            type: CoolAlertType.success,
-            text: "Visita registrada com sucesso",
-            title: "Visita gravada!");
+      CoolAlert.show(
+        context: context,
+        type: CoolAlertType.success,
+        text: "Visita registrada com sucesso",
+        title: "Visita gravada!",
+      );
 
-        setState(() {
-          visitante = null;
-        });
-      } else {
-        CoolAlert.show(
-            context: context,
-            type: CoolAlertType.error,
-            text: "Ops, algo deu errado!",
-            title: "Problemas!");
-      }
-    } else {
+      setState(() {
+        visitante = null;
+      });
+    } else if (response.statusCode == 500) {
+      var value = json.decode(response.body);
       CoolAlert.show(
           context: context,
           type: CoolAlertType.error,
-          text: "Servidor inacessível",
-          title: "Tente novamente!");
+          title: "Ops, algo deu errado!",
+          text: value["message"]);
+    } else {
+      CoolAlert.show(
+        context: context,
+        type: CoolAlertType.error,
+        text: "Servidor inacessível",
+        title: "Tente novamente!",
+      );
     }
   }
 

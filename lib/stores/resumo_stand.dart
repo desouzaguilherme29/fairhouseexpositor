@@ -8,7 +8,21 @@ class ResumoStand = _ResumoStand with _$ResumoStand;
 
 abstract class _ResumoStand with Store {
   _ResumoStand() {
-    loadResumo();
+    autorun((_) async {
+      loading = true;
+      try {
+        final visitantes = await VisitanteRepositorio().getResumo();
+        setVisitantes(visitantes);
+
+        loading = false;
+        error = null;
+        //return true;
+      } catch (e) {
+        error = e.toString();
+        loading = false;
+        //return false;
+      }
+    });
   }
 
   ObservableList<Resumo> resumoList = ObservableList<Resumo>();

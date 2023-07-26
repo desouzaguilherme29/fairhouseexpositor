@@ -35,15 +35,16 @@ class UsuarioRepositorio {
   Future<Usuario?> Login(String? usuario, String? senha) async {
     var url = getUrlLogin(usuario, senha);
 
-    var response = await http.get(url);
+    var response = await http.post(url,
+        body: jsonEncode({"usuario": usuario, "senha": senha}));
 
     if (response.statusCode == 200) {
       var value = json.decode(response.body);
       if (value.toString().length > 2) {
-        var resultUser = await Usuario.fromJson(value[0]);
+        var resultUser = await Usuario.fromJson(value["Expositor"]);
         return resultUser;
       }
-    } else if (response.statusCode == 401) {
+    } else if (response.statusCode == 406) {
       EasyLoading.showError("Usuário ou Senha incorretos!");
       return Future.error("Usuário ou Senha incorretos!");
     } else {

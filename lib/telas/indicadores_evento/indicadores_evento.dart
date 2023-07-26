@@ -51,7 +51,7 @@ class IndicadoresEvento extends StatelessWidget {
                     height: 8,
                   ),
                   Text(
-                    "Ocorreu um erro! \n${_visitantesHoraEvento.error}",
+                    "Ocorreu um erro! \n${_resumoStand.error}",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white,
@@ -172,7 +172,8 @@ class IndicadoresEvento extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 50),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 15, vertical: 50),
                       child: Text(
                         "Ainda não há dados para análise gráfica.\n\nAguarde visitantes fazerem check-in...",
                         textAlign: TextAlign.center,
@@ -187,12 +188,13 @@ class IndicadoresEvento extends StatelessWidget {
               );
             } else {
               return Container(
-                  margin: EdgeInsets.symmetric(horizontal: 15),
-                  height: MediaQuery.of(context).size.height * 0.35,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                  ),
-                  child: GraficoHora(),);
+                margin: EdgeInsets.symmetric(horizontal: 15),
+                height: MediaQuery.of(context).size.height * 0.35,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                ),
+                child: GraficoHora(),
+              );
             }
           }),
         ],
