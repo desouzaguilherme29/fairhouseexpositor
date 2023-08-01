@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:fairhouseexpositor/globais/global_statics.dart';
 import 'package:fairhouseexpositor/stores/login_store.dart';
@@ -15,7 +17,6 @@ import 'package:page_transition/page_transition.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-
 
 class MyHttpOverrides extends HttpOverrides {
   @override

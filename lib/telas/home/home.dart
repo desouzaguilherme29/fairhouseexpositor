@@ -36,7 +36,7 @@ class _HomeState extends State<Home> {
         body: Center(
           child: Card(
             color: Colors.white,
-            margin: EdgeInsets.symmetric(horizontal: 32),
+            margin: EdgeInsets.symmetric(horizontal: 16),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
             ),
@@ -48,7 +48,7 @@ class _HomeState extends State<Home> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Container(
-                    height: 420,
+                    height: 455,
                     child: Column(
                       children: [
                         _textField(

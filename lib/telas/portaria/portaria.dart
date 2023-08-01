@@ -41,7 +41,7 @@ class _PortariaState extends State<Portaria> {
       body: Center(
         child: Card(
           color: Colors.white,
-          margin: EdgeInsets.symmetric(horizontal: 32),
+          margin: EdgeInsets.symmetric(horizontal: 16),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
@@ -53,7 +53,7 @@ class _PortariaState extends State<Portaria> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
-                  height: 420,
+                  height: 455,
                   child: Column(
                     children: [
                       _textField(
