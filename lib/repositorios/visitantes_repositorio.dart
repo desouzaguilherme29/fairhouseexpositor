@@ -42,7 +42,7 @@ class VisitanteRepositorio {
       }
       var values = json.decode(utf8.decode(response.bodyBytes));
 
-      if (values.toString().length > 0) {
+      if (values.toString().length > 10) {
         values.forEach((element) {
           visitantes.add(VisitantesHora.fromJson(element));
         });
@@ -63,7 +63,7 @@ class VisitanteRepositorio {
         return [];
       }
       var values = json.decode(utf8.decode(response.bodyBytes));
-      if (values.toString().length > 0) {
+      if (values.toString().length > 10) {
         values.forEach((element) {
           visitantes.add(VisitanteFeira.fromJson(element));
         });
@@ -83,7 +83,7 @@ class VisitanteRepositorio {
         return [];
       }
       var values = json.decode(utf8.decode(response.bodyBytes));
-      if (values.toString().length > 0) {
+      if (values.toString().length > 10) {
         values.forEach((element) {
           visitantes.add(Resumo.fromJson(element));
         });

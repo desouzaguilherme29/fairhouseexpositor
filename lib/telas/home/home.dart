@@ -11,6 +11,10 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:fairhouseexpositor/globais/global_statics.dart';
+
+import '../portaria/ambiente.dart';
+import '../portaria/portaria.dart';
 
 Visitante? visitante = Visitante();
 
@@ -25,6 +29,7 @@ class _HomeState extends State<Home> {
   TextEditingController _controllerRazaoSocial = TextEditingController();
   TextEditingController _controllerCidade = TextEditingController();
   TextEditingController _controllerTipo = TextEditingController();
+  SingingCharacter _character = SingingCharacter.Entrada;
 
   @override
   Widget build(BuildContext context) {
@@ -33,92 +38,167 @@ class _HomeState extends State<Home> {
         appBar: AppBar(
           title: Text("Bem Vindo"),
         ),
-        body: Center(
-          child: Card(
-            color: Colors.white,
-            margin: EdgeInsets.symmetric(horizontal: 16),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
-            ),
-            elevation: 8,
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Container(
-                    height: 455,
+        body: userManagerStore.user!.id == 1
+            ? Center(
+                child: Card(
+                  color: Colors.white,
+                  margin: EdgeInsets.symmetric(horizontal: 32),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  elevation: 8,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisSize: MainAxisSize.min,
                       children: [
-                        _textField(
-                            _controllerNome, "Nome", FontAwesomeIcons.user),
                         Container(
-                          width: 250.0,
-                          height: 1.0,
-                          color: Colors.grey[400],
+                          padding: EdgeInsets.all(25),
+                          height: 170,
+                          color: Colors.white,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              RadioListTile<SingingCharacter>(
+                                title: const Text('Entrada',
+                                    style: TextStyle(
+                                      fontFamily: "WorkSansMedium",
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.w800,
+                                    )),
+                                value: SingingCharacter.Entrada,
+                                groupValue: _character,
+                                onChanged: (SingingCharacter? value) {
+                                  setState(() {
+                                    _character = value!;
+                                    GlobalStatics.entrada = true;
+                                  });
+                                },
+                              ),
+                              RadioListTile<SingingCharacter>(
+                                title: const Text(
+                                  'Saída',
+                                  style: TextStyle(
+                                    fontFamily: "WorkSansMedium",
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w800,
+                                  ),
+                                ),
+                                value: SingingCharacter.Saida,
+                                groupValue: _character,
+                                onChanged: (SingingCharacter? value) {
+                                  setState(() {
+                                    _character = value!;
+                                    GlobalStatics.entrada = false;
+                                  });
+                                },
+                              ),
+                            ],
+                          ),
                         ),
-                        _textField(_controllerFantasia, "Fantasia",
-                            FontAwesomeIcons.building),
                         Container(
-                          width: 250.0,
-                          height: 1.0,
-                          color: Colors.grey[400],
-                        ),
-                        _textField(_controllerRazaoSocial, "Razão Social",
-                            FontAwesomeIcons.briefcase),
-                        Container(
-                          width: 250.0,
-                          height: 1.0,
-                          color: Colors.grey[400],
-                        ),
-                        _textField(
-                            _controllerCidade, "Cidade", FontAwesomeIcons.city),
-                        Container(
-                          width: 250.0,
-                          height: 1.0,
-                          color: Colors.grey[400],
-                        ),
-                        _textField(
-                            _controllerTipo, "Tipo", FontAwesomeIcons.idBadge),
-                        Container(
-                          width: 250.0,
-                          height: 1.0,
-                          color: Colors.grey[400],
-                        ),
+                          margin: EdgeInsets.symmetric(vertical: 16),
+                          height: 50,
+                          child: customElevatedButton(
+                            context,
+                            "Entrar",
+                            Colors.orange,
+                            Colors.orange.withAlpha(120),
+                            _entrar,
+                          ),
+                        )
                       ],
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.symmetric(vertical: 5),
-                    height: 50,
-                    child: customElevatedButton(
-                      context,
-                      "Ler",
-                      Colors.orange,
-                      Colors.orange.withAlpha(120),
-                      _leVisitante,
+                ),
+              )
+            : Center(
+                child: Card(
+                  color: Colors.white,
+                  margin: EdgeInsets.symmetric(horizontal: 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  elevation: 8,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Container(
+                          height: 455,
+                          child: Column(
+                            children: [
+                              _textField(_controllerNome, "Nome",
+                                  FontAwesomeIcons.user),
+                              Container(
+                                width: 250.0,
+                                height: 1.0,
+                                color: Colors.grey[400],
+                              ),
+                              _textField(_controllerFantasia, "Fantasia",
+                                  FontAwesomeIcons.building),
+                              Container(
+                                width: 250.0,
+                                height: 1.0,
+                                color: Colors.grey[400],
+                              ),
+                              _textField(_controllerRazaoSocial, "Razão Social",
+                                  FontAwesomeIcons.briefcase),
+                              Container(
+                                width: 250.0,
+                                height: 1.0,
+                                color: Colors.grey[400],
+                              ),
+                              _textField(_controllerCidade, "Cidade",
+                                  FontAwesomeIcons.city),
+                              Container(
+                                width: 250.0,
+                                height: 1.0,
+                                color: Colors.grey[400],
+                              ),
+                              _textField(_controllerTipo, "Tipo",
+                                  FontAwesomeIcons.idBadge),
+                              Container(
+                                width: 250.0,
+                                height: 1.0,
+                                color: Colors.grey[400],
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.symmetric(vertical: 5),
+                          height: 50,
+                          child: customElevatedButton(
+                            context,
+                            "Ler",
+                            Colors.orange,
+                            Colors.orange.withAlpha(120),
+                            _leVisitante,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 0,
+                        ),
+                        Container(
+                          margin: EdgeInsets.symmetric(vertical: 5),
+                          height: 50,
+                          child: customElevatedButton(
+                            context,
+                            "Gravar",
+                            Colors.orange,
+                            Colors.orange.withAlpha(120),
+                            visitante != null ? _gravaVisita : null,
+                          ),
+                        )
+                      ],
                     ),
                   ),
-                  SizedBox(
-                    height: 0,
-                  ),
-                  Container(
-                    margin: EdgeInsets.symmetric(vertical: 5),
-                    height: 50,
-                    child: customElevatedButton(
-                      context,
-                      "Gravar",
-                      Colors.orange,
-                      Colors.orange.withAlpha(120),
-                      visitante != null ? _gravaVisita : null,
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
-        ));
+                ),
+              ));
   }
 
   _textField(TextEditingController _controller, String _text, IconData _icon) {
@@ -228,5 +308,13 @@ class _HomeState extends State<Home> {
     if (result.isNotEmpty) {
       await _getVisitante(result);
     }
+  }
+
+  _entrar() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => Portaria(),
+      ),
+    );
   }
 }

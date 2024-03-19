@@ -1,10 +1,18 @@
+import 'dart:convert';
+import 'dart:math';
+
+import 'package:cool_alert/cool_alert.dart';
+import 'package:fairhouseexpositor/componentes/components.dart';
 import 'package:fairhouseexpositor/componentes/drawer/drawer.dart';
 import 'package:fairhouseexpositor/stores/visitantes_feira.dart';
 import 'package:fairhouseexpositor/telas/meus_visitantes/componentes/dialog_pesquisa.dart';
 import 'package:fairhouseexpositor/telas/todos_visitantes/componentes/list_view_visitantes_feira.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_it/get_it.dart';
+import 'package:http/http.dart' as http;
+import '../../models/url_service.dart';
 
 class TodosVisitantes extends StatelessWidget {
   VisitantesFeira visitantes = GetIt.I<VisitantesFeira>();
@@ -73,6 +81,34 @@ class TodosVisitantes extends StatelessWidget {
             margin: EdgeInsets.symmetric(horizontal: 5),
             child: Column(
               children: [
+                ElevatedButton(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        FontAwesomeIcons.envelope,
+                        color: Colors.white,
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        "Receber lista no E-mail",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                          fontFamily: "WorkSansMedium",
+                        ),
+                      )
+                    ],
+                  ),
+                  onPressed: () => _solicitarRelatorio(context),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
                 Expanded(
                   child: Observer(builder: (_) {
                     if (visitantes.error != null) {
@@ -144,5 +180,35 @@ class TodosVisitantes extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future _solicitarRelatorio(BuildContext context) async {
+    http.Response response;
+    Uri url;
+    url = getUrlEnvioRelatorio();
+    response = await http.post(url);
+
+    if (response.statusCode == 200) {
+      CoolAlert.show(
+        context: context,
+        type: CoolAlertType.success,
+        text:
+            "Todos os visitantes foram enviados, verifique o de e-mail informado no cadastro do expositor.",
+        title: "Solicitação bem sucedida!",
+      );
+    } else if (response.statusCode == 500) {
+      var value = json.decode(response.body);
+      CoolAlert.show(
+          context: context,
+          type: CoolAlertType.error,
+          title: "Ops, algo deu errado!",
+          text: value["message"]);
+    } else {
+      CoolAlert.show(
+          context: context,
+          type: CoolAlertType.error,
+          title: "Servidor inacessível",
+          text: "Tente novamente");
+    }
   }
 }

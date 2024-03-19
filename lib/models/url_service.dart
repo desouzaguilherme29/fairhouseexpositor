@@ -61,3 +61,9 @@ getUrlGravarEntrada(int idVisitante) {
       getUrlServer() + "mobile/portaria/gravarvisita?id_visitante=$idVisitante";
   return Uri.parse(url);
 }
+
+getUrlEnvioRelatorio() {
+  var url = getUrlServer() +
+      "relatorios/visitantes/enviar-relatorio-visitantes?id=${userManagerStore.user!.id}";
+  return Uri.parse(url);
+}

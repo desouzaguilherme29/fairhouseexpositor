@@ -45,16 +45,6 @@ class PageSection extends StatelessWidget {
           },
           highlighted: pageStore.page == 3,
         ),
-        userManagerStore.user!.id == 1
-            ? PageTile(
-                label: 'Portaria',
-                iconData: FontAwesomeIcons.userTag,
-                onTap: () {
-                  pageStore.setPage(4);
-                },
-                highlighted: pageStore.page == 4,
-              )
-            : Container(),
       ],
     );
   }
