@@ -58,12 +58,11 @@ class CustomDrawerHeader extends StatelessWidget {
                       ),
                       textAlign: TextAlign.center,
                     ),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Text(
-                      userManagerStore.isLoggedIn
-                          ? userManagerStore.user!.razaosocial!
-                              .toLowerCase()
-                              .capitalizeFirstofEach
-                          : "Clique Aqui",
+                      "${userManagerStore.isLoggedIn ? userManagerStore.user!.evento!.toLowerCase().capitalizeFirstofEach : ""}",
                       style: TextStyle(
                         color: Colors.orange,
                         fontSize: 12,

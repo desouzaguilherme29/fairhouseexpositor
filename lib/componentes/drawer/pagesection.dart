@@ -22,7 +22,7 @@ class PageSection extends StatelessWidget {
           highlighted: pageStore.page == 0,
         ),
         PageTile(
-          label: 'Meus Visitantes',
+          label: 'Meus visitantes',
           iconData: FontAwesomeIcons.userTag,
           onTap: () {
             pageStore.setPage(1);
@@ -30,7 +30,7 @@ class PageSection extends StatelessWidget {
           highlighted: pageStore.page == 1,
         ),
         PageTile(
-          label: 'Indicadores Evento',
+          label: 'Indicadores',
           iconData: FontAwesomeIcons.list,
           onTap: () {
             pageStore.setPage(2);
@@ -38,8 +38,16 @@ class PageSection extends StatelessWidget {
           highlighted: pageStore.page == 2,
         ),
         PageTile(
-          label: 'Todos Visitantes',
-          iconData: FontAwesomeIcons.boxes,
+          label: 'Visitando agora',
+          iconData: FontAwesomeIcons.userClock,
+          onTap: () {
+            pageStore.setPage(5);
+          },
+          highlighted: pageStore.page == 5,
+        ),
+        PageTile(
+          label: 'Todos os visitantes',
+          iconData: FontAwesomeIcons.userGroup,
           onTap: () {
             pageStore.setPage(3);
           },

@@ -32,6 +32,7 @@ abstract class _UserManagerStore with Store {
       prefs.setString(key_razao_expositor, user!.razaosocial!);
       prefs.setString(key_cidade_expositor, user!.cidade!);
       prefs.setString(key_cnpj_expositor, user!.cnpj!);
+      prefs.setString(key_evento_expositor, user!.evento!);
     }
   }
 
@@ -47,6 +48,7 @@ abstract class _UserManagerStore with Store {
     prefs.remove(key_razao_expositor);
     prefs.remove(key_cidade_expositor);
     prefs.remove(key_cnpj_expositor);
+    prefs.remove(key_evento_expositor);
   }
 
   Future<void> _getUsuarioConectado() async {

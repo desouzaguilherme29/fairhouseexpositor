@@ -5,6 +5,7 @@ import 'package:fairhouseexpositor/globais/global_statics.dart';
 import 'package:fairhouseexpositor/stores/login_store.dart';
 import 'package:fairhouseexpositor/stores/page_store.dart';
 import 'package:fairhouseexpositor/stores/resumo_stand.dart';
+import 'package:fairhouseexpositor/stores/todos_visitantes_feira.dart';
 import 'package:fairhouseexpositor/stores/user_manager_store.dart';
 import 'package:fairhouseexpositor/stores/visitante_stand.dart';
 import 'package:fairhouseexpositor/stores/visitantes_feira.dart';
@@ -43,6 +44,7 @@ void setupLocators() async {
   GetIt.I.registerSingleton(VisitantesHoraEvento());
   GetIt.I.registerSingleton(ResumoStand());
   GetIt.I.registerSingleton(VisitanteStandStore());
+  GetIt.I.registerSingleton(TodosVisitantesFeira());
 }
 
 void configLoading() {

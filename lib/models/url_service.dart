@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:fairhouseexpositor/stores/user_manager_store.dart';
 import 'package:get_it/get_it.dart';
 
@@ -31,10 +33,16 @@ getUrlVisitantesStand(String filtro) {
   return Uri.parse(url);
 }
 
-getUrlVisitantesFeira(String filtro) {
+getUrlVisitantesFeira(String filtro, int pagina) {
   var url = getUrlServer() +
-      "mobile/indicadores/visitantes-evento?pesquisa=" +
-      filtro;
+      "mobile/indicadores/visitantes-evento?pesquisa=$filtro&pagina=$pagina";
+
+  return Uri.parse(url);
+}
+
+getUrlTodosVisitantesFeira(String filtro, int pagina) {
+  var url = getUrlServer() +
+      "mobile/indicadores/todos-visitantes-evento?pesquisa=$filtro&pagina=$pagina";
 
   return Uri.parse(url);
 }

@@ -2,18 +2,18 @@ import 'package:fairhouseexpositor/models/VisitanteFeira.dart';
 import 'package:fairhouseexpositor/repositorios/visitantes_repositorio.dart';
 import 'package:mobx/mobx.dart';
 
-part 'visitantes_feira.g.dart';
+part 'todos_visitantes_feira.g.dart';
 
-class VisitantesFeira = _VisitantesFeira with _$VisitantesFeira;
+class TodosVisitantesFeira = _TodosVisitantesFeira with _$TodosVisitantesFeira;
 
-abstract class _VisitantesFeira with Store {
-  _VisitantesFeira() {
+abstract class _TodosVisitantesFeira with Store {
+  _TodosVisitantesFeira() {
     autorun((_) async {
       setLoading(true);
       try {
         List<VisitanteFeira> visitantes = [];
         visitantes = await VisitanteRepositorio()
-            .getListaVisitandoAgora(filtro: pesquisa, pagina: pagina);
+            .getListaTodosVisitantesFeira(filtro: pesquisa, pagina: pagina);
 
         novosVisitantes(visitantes);
         setError(null);
@@ -46,7 +46,7 @@ abstract class _VisitantesFeira with Store {
   void setError(String? value) => error = value;
 
   ObservableList<VisitanteFeira> visitanteList =
-  ObservableList<VisitanteFeira>();
+      ObservableList<VisitanteFeira>();
 
   @action
   void setPesquisa(String value) {
@@ -85,6 +85,6 @@ abstract class _VisitantesFeira with Store {
   }
 
   Future<void> loadVisitantes() async {
-    resetPage();
+      resetPage();
   }
 }

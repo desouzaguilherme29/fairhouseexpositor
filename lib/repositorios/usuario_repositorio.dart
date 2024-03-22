@@ -15,6 +15,12 @@ class UsuarioRepositorio {
     if (!prefs.containsKey(key_codigo_expositor)) {
       return null;
     }
+    if (!prefs.containsKey(key_evento_expositor)) {
+      return null;
+    }
+    if (prefs.getString(key_evento_expositor) == "") {
+      return null;
+    }
 
     if (prefs.getInt(key_codigo_expositor) != null &&
         prefs.getInt(key_codigo_expositor) != 0) {
@@ -24,6 +30,7 @@ class UsuarioRepositorio {
         cnpj: prefs.getString(key_cnpj_expositor),
         cidade: prefs.getString(key_cidade_expositor),
         razaosocial: prefs.getString(key_razao_expositor),
+        evento: prefs.getString(key_evento_expositor),
       );
 
       return usuario;

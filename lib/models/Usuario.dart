@@ -11,6 +11,7 @@ class Usuario {
   String? datacadastro;
   String? login;
   String? senha;
+  String? evento;
 
   Usuario(
       {this.id,
@@ -24,7 +25,8 @@ class Usuario {
       this.tpAtivo,
       this.datacadastro,
       this.login,
-      this.senha});
+      this.senha,
+      this.evento});
 
   factory Usuario.fromJson(Map<String, dynamic> json) {
     return Usuario(
@@ -40,6 +42,7 @@ class Usuario {
       datacadastro: json['datacadastro'],
       login: json['login'],
       senha: json['senha'],
+      evento: json['evento'],
     );
   }
 
@@ -57,6 +60,7 @@ class Usuario {
     data['datacadastro'] = this.datacadastro;
     data['login'] = this.login;
     data['senha'] = this.senha;
+    data['evento'] = this.evento;
     return data;
   }
 

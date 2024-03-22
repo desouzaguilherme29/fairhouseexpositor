@@ -1,17 +1,15 @@
 import 'package:fairhouseexpositor/componentes/components.dart';
 import 'package:fairhouseexpositor/componentes/drawer/drawer.dart';
-import 'package:fairhouseexpositor/stores/todos_visitantes_feira.dart';
+import 'package:fairhouseexpositor/stores/visitantes_feira.dart';
 import 'package:fairhouseexpositor/telas/meus_visitantes/componentes/dialog_pesquisa.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_it/get_it.dart';
 
-import '../../globais/global_functions.dart';
-import 'componentes/list_view_todos_visitantes_feira.dart';
+import 'componentes/list_view_visitando_agora.dart';
 
-class TodosVisitantes extends StatelessWidget {
-  TodosVisitantesFeira visitantes = GetIt.I<TodosVisitantesFeira>();
+class VisitandoAgora extends StatelessWidget {
+  VisitantesFeira visitantes = GetIt.I<VisitantesFeira>();
 
   abrePesquisa(BuildContext context) async {
     final texto = await showDialog(
@@ -39,7 +37,7 @@ class TodosVisitantes extends StatelessWidget {
                     width: constraits.biggest.width,
                     child: Text(
                       visitantes.pesquisa == ""
-                          ? "Todos os visitantes"
+                          ? "Visitando agora"
                           : visitantes.pesquisa,
                       textAlign: TextAlign.center,
                       style: TextStyle(
@@ -77,42 +75,6 @@ class TodosVisitantes extends StatelessWidget {
             margin: EdgeInsets.symmetric(horizontal: 5),
             child: Column(
               children: [
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.orange,
-                      padding: EdgeInsets.symmetric(horizontal: 1, vertical: 1),
-                      textStyle: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          FontAwesomeIcons.envelope,
-                          color: Colors.black,
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          "Enviar para e-mail",
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black,
-                            fontFamily: "WorkSansMedium",
-                          ),
-                        )
-                      ],
-                    ),
-                    onPressed: () => solicitarRelatorio(context),
-                  ),
-                ),
                 Expanded(
                   child: Observer(builder: (_) {
                     if (visitantes.error != null) {
@@ -126,7 +88,7 @@ class TodosVisitantes extends StatelessWidget {
                     } else if (visitantes.visitanteList.isEmpty) {
                       return compEmptyList();
                     } else {
-                      return ListViewTodosVisitantesFeira();
+                      return ListViewVisitandoAgoraFeira();
                     }
                   }),
                 ),

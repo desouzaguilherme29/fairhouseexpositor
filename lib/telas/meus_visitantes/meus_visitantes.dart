@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../componentes/components.dart';
+
 class MeusVisitantes extends StatelessWidget {
   VisitanteStandStore visitantes = GetIt.I<VisitanteStandStore>();
 
@@ -35,7 +37,7 @@ class MeusVisitantes extends StatelessWidget {
                     width: constraits.biggest.width,
                     child: Text(
                       visitantes.pesquisa == ""
-                          ? "Visitantes Stand"
+                          ? "Meus visitantes"
                           : visitantes.pesquisa,
                       textAlign: TextAlign.center,
                       style: TextStyle(
@@ -76,63 +78,11 @@ class MeusVisitantes extends StatelessWidget {
                   margin: EdgeInsets.symmetric(horizontal: 5),
                   child: Observer(builder: (_) {
                     if (visitantes.error != null) {
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.error_outline_outlined,
-                            color: Colors.white,
-                            size: 80,
-                          ),
-                          const SizedBox(
-                            height: 8,
-                          ),
-                          Text(
-                            "Ocorreu um erro! \n${visitantes.error}",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w700,
-                              fontFamily: "WorkSansMedium",
-                            ),
-                          )
-                        ],
-                      );
+                      return compErrorList(visitantes.error);
                     } else if (visitantes.loading) {
-                      return Center(
-                        child: CircularProgressIndicator(
-                          valueColor: AlwaysStoppedAnimation(Colors.white),
-                        ),
-                      );
+                      return compLoadingList();
                     } else if (visitantes.visitanteList.isEmpty) {
-                      return Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.mood_bad_outlined,
-                              color: Colors.white,
-                              size: 80,
-                            ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            Text(
-                              "Não há resultados...",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w700,
-                                fontFamily: "WorkSansMedium",
-                              ),
-                            )
-                          ],
-                        ),
-                      );
+                      return compEmptyList();
                     } else {
                       return ListViewVisitantesStand();
                     }

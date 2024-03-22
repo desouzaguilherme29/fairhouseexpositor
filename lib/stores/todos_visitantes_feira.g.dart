@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'visitantes_feira.dart';
+part of 'todos_visitantes_feira.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,24 +8,24 @@ part of 'visitantes_feira.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
-mixin _$VisitantesFeira on _VisitantesFeira, Store {
+mixin _$TodosVisitantesFeira on _TodosVisitantesFeira, Store {
   Computed<int>? _$itemCountComputed;
 
   @override
   int get itemCount =>
       (_$itemCountComputed ??= Computed<int>(() => super.itemCount,
-              name: '_VisitantesFeira.itemCount'))
+              name: '_TodosVisitantesFeira.itemCount'))
           .value;
   Computed<bool>? _$showProgressComputed;
 
   @override
   bool get showProgress =>
       (_$showProgressComputed ??= Computed<bool>(() => super.showProgress,
-              name: '_VisitantesFeira.showProgress'))
+              name: '_TodosVisitantesFeira.showProgress'))
           .value;
 
   late final _$loadingAtom =
-      Atom(name: '_VisitantesFeira.loading', context: context);
+      Atom(name: '_TodosVisitantesFeira.loading', context: context);
 
   @override
   bool get loading {
@@ -41,7 +41,7 @@ mixin _$VisitantesFeira on _VisitantesFeira, Store {
   }
 
   late final _$errorAtom =
-      Atom(name: '_VisitantesFeira.error', context: context);
+      Atom(name: '_TodosVisitantesFeira.error', context: context);
 
   @override
   String? get error {
@@ -57,7 +57,7 @@ mixin _$VisitantesFeira on _VisitantesFeira, Store {
   }
 
   late final _$paginaAtom =
-      Atom(name: '_VisitantesFeira.pagina', context: context);
+      Atom(name: '_TodosVisitantesFeira.pagina', context: context);
 
   @override
   int get pagina {
@@ -73,7 +73,7 @@ mixin _$VisitantesFeira on _VisitantesFeira, Store {
   }
 
   late final _$lastpageAtom =
-      Atom(name: '_VisitantesFeira.lastpage', context: context);
+      Atom(name: '_TodosVisitantesFeira.lastpage', context: context);
 
   @override
   bool get lastpage {
@@ -89,7 +89,7 @@ mixin _$VisitantesFeira on _VisitantesFeira, Store {
   }
 
   late final _$pesquisaAtom =
-      Atom(name: '_VisitantesFeira.pesquisa', context: context);
+      Atom(name: '_TodosVisitantesFeira.pesquisa', context: context);
 
   @override
   String get pesquisa {
@@ -104,61 +104,61 @@ mixin _$VisitantesFeira on _VisitantesFeira, Store {
     });
   }
 
-  late final _$_VisitantesFeiraActionController =
-      ActionController(name: '_VisitantesFeira', context: context);
+  late final _$_TodosVisitantesFeiraActionController =
+      ActionController(name: '_TodosVisitantesFeira', context: context);
 
   @override
   void setLoading(bool value) {
-    final _$actionInfo = _$_VisitantesFeiraActionController.startAction(
-        name: '_VisitantesFeira.setLoading');
+    final _$actionInfo = _$_TodosVisitantesFeiraActionController.startAction(
+        name: '_TodosVisitantesFeira.setLoading');
     try {
       return super.setLoading(value);
     } finally {
-      _$_VisitantesFeiraActionController.endAction(_$actionInfo);
+      _$_TodosVisitantesFeiraActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void setError(String? value) {
-    final _$actionInfo = _$_VisitantesFeiraActionController.startAction(
-        name: '_VisitantesFeira.setError');
+    final _$actionInfo = _$_TodosVisitantesFeiraActionController.startAction(
+        name: '_TodosVisitantesFeira.setError');
     try {
       return super.setError(value);
     } finally {
-      _$_VisitantesFeiraActionController.endAction(_$actionInfo);
+      _$_TodosVisitantesFeiraActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void setPesquisa(String value) {
-    final _$actionInfo = _$_VisitantesFeiraActionController.startAction(
-        name: '_VisitantesFeira.setPesquisa');
+    final _$actionInfo = _$_TodosVisitantesFeiraActionController.startAction(
+        name: '_TodosVisitantesFeira.setPesquisa');
     try {
       return super.setPesquisa(value);
     } finally {
-      _$_VisitantesFeiraActionController.endAction(_$actionInfo);
+      _$_TodosVisitantesFeiraActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void setVisitantes(List<VisitanteFeira> visitante) {
-    final _$actionInfo = _$_VisitantesFeiraActionController.startAction(
-        name: '_VisitantesFeira.setVisitantes');
+    final _$actionInfo = _$_TodosVisitantesFeiraActionController.startAction(
+        name: '_TodosVisitantesFeira.setVisitantes');
     try {
       return super.setVisitantes(visitante);
     } finally {
-      _$_VisitantesFeiraActionController.endAction(_$actionInfo);
+      _$_TodosVisitantesFeiraActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void carregaProximaPagina() {
-    final _$actionInfo = _$_VisitantesFeiraActionController.startAction(
-        name: '_VisitantesFeira.carregaProximaPagina');
+    final _$actionInfo = _$_TodosVisitantesFeiraActionController.startAction(
+        name: '_TodosVisitantesFeira.carregaProximaPagina');
     try {
       return super.carregaProximaPagina();
     } finally {
-      _$_VisitantesFeiraActionController.endAction(_$actionInfo);
+      _$_TodosVisitantesFeiraActionController.endAction(_$actionInfo);
     }
   }
 

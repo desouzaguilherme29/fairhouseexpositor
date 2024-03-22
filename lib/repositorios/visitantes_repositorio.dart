@@ -19,7 +19,7 @@ class VisitanteRepositorio {
         return [];
       }
       var values = json.decode(utf8.decode(response.bodyBytes));
-      if (values.toString().length > 0) {
+      if (values.toString().length > 10) {
         values.forEach((element) {
           visitantes.add(VisitanteStand.fromJson(element));
         });
@@ -53,11 +53,33 @@ class VisitanteRepositorio {
     return [];
   }
 
-  Future<List<VisitanteFeira>> getListaVisitantesFeira({String? filtro}) async {
+  Future<List<VisitanteFeira>> getListaVisitandoAgora({String? filtro, required int pagina}) async {
     http.Response response;
     List<VisitanteFeira> visitantes = [];
 
-    response = await http.get(getUrlVisitantesFeira(filtro!));
+    response = await http.get(getUrlVisitantesFeira(filtro!, pagina));
+    if (response.statusCode == 200) {
+      if (response.body.isEmpty) {
+        return [];
+      }
+      var values = json.decode(utf8.decode(response.bodyBytes));
+      if (values.toString().length > 10) {
+        values.forEach((element) {
+          visitantes.add(VisitanteFeira.fromJson(element));
+        });
+        return visitantes;
+      }
+    }
+
+    return visitantes;
+  }
+
+  Future<List<VisitanteFeira>> getListaTodosVisitantesFeira(
+      {String? filtro, required int pagina}) async {
+    http.Response response;
+    List<VisitanteFeira> visitantes = [];
+
+    response = await http.get(getUrlTodosVisitantesFeira(filtro!, pagina));
     if (response.statusCode == 200) {
       if (response.body.isEmpty) {
         return [];
