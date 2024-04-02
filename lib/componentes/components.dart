@@ -124,7 +124,7 @@ Widget compItemList(
               : Colors.yellowAccent,
     ),
     child: Container(
-      padding: EdgeInsets.only(left: 4, top: 5, bottom: 2),
+      padding: EdgeInsets.only(left: 4, top: 5, bottom: 2,),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(
             topRight: Radius.circular(10.0),

@@ -56,7 +56,7 @@ class _HomeState extends State<Home> {
                         Container(
                           padding: EdgeInsets.all(25),
                           height: 170,
-                          color: Colors.white,
+                          color: Colors.white10,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [

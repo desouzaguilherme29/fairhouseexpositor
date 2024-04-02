@@ -15,7 +15,6 @@ import 'package:fairhouseexpositor/telas/login/login.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
@@ -63,9 +62,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       builder: EasyLoading.init(),
       debugShowCheckedModeBanner: false,
-      title: "FairHouse Expositores",
+      title: "FairHouse",
       theme: ThemeData(
         appBarTheme: AppBarTheme(
+          iconTheme: IconThemeData(color: Colors.orange),
           elevation: 0,
           backgroundColor: Colors.black,
           centerTitle: true,
@@ -78,9 +78,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.black,
       ),
       localizationsDelegates: [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
+
       ],
       home: AnimatedSplashScreen.withScreenFunction(
         splash: "imagens/logo_fairhouse.png",
