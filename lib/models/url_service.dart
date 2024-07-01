@@ -6,7 +6,7 @@ import 'package:get_it/get_it.dart';
 final UserManagerStore userManagerStore = GetIt.I<UserManagerStore>();
 
 getUrlServer() {
-  return "https://api.geniuspro.com.br:8830/";
+  return "https://api.solucoesgenius.com.br:8830/";
 }
 
 getUrlLogin(String? user, senha) {
