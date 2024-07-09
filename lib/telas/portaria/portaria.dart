@@ -53,7 +53,7 @@ class _PortariaState extends State<Portaria> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
-                  height: 455,
+                  height: 475,
                   child: Column(
                     children: [
                       _textField(
@@ -98,10 +98,14 @@ class _PortariaState extends State<Portaria> {
                   margin: EdgeInsets.symmetric(vertical: 5),
                   height: 50,
                   child: ElevatedButton(
-                      // shape: RoundedRectangleBorder(
-                      //     borderRadius: BorderRadius.circular(25)),
-                      // color: Colors.orange,
-                      // disabledColor: Colors.orange.withAlpha(120),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.orange,
+                        padding: EdgeInsets.symmetric(horizontal: 1, vertical: 1),
+                        textStyle: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -143,10 +147,14 @@ class _PortariaState extends State<Portaria> {
                   margin: EdgeInsets.symmetric(vertical: 5),
                   height: 50,
                   child: ElevatedButton(
-                    // shape: RoundedRectangleBorder(
-                    //     borderRadius: BorderRadius.circular(25)),
-                    // color: Colors.orange,
-                    // disabledColor: Colors.orange.withAlpha(120),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.orange,
+                      padding: EdgeInsets.symmetric(horizontal: 1, vertical: 1),
+                      textStyle: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
