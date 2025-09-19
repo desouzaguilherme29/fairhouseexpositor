@@ -53,7 +53,7 @@ class _PortariaState extends State<Portaria> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
-                  height: 455,
+                  height: 475,
                   child: Column(
                     children: [
                       _textField(
@@ -98,10 +98,14 @@ class _PortariaState extends State<Portaria> {
                   margin: EdgeInsets.symmetric(vertical: 5),
                   height: 50,
                   child: ElevatedButton(
-                      // shape: RoundedRectangleBorder(
-                      //     borderRadius: BorderRadius.circular(25)),
-                      // color: Color.fromRGBO(63, 81, 181, 1.0),
-                      // disabledColor: Color.fromRGBO(2, 182, 254, 0.5),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.orange,
+                        padding: EdgeInsets.symmetric(horizontal: 1, vertical: 1),
+                        textStyle: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -143,10 +147,14 @@ class _PortariaState extends State<Portaria> {
                   margin: EdgeInsets.symmetric(vertical: 5),
                   height: 50,
                   child: ElevatedButton(
-                    // shape: RoundedRectangleBorder(
-                    //     borderRadius: BorderRadius.circular(25)),
-                    // color: Color.fromRGBO(2, 182, 254, 0.5),
-                    // disabledColor: Color.fromRGBO(2, 182, 254, 0.5),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.orange,
+                      padding: EdgeInsets.symmetric(horizontal: 1, vertical: 1),
+                      textStyle: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -198,7 +206,7 @@ class _PortariaState extends State<Portaria> {
           border: InputBorder.none,
           icon: Icon(
             _icon,
-            color: Color.fromRGBO(2, 182, 254, 0.8),
+            color: Colors.orange.withOpacity(0.8),
             size: 20.0,
           ),
           labelText: _text,
@@ -206,7 +214,7 @@ class _PortariaState extends State<Portaria> {
           hintStyle: TextStyle(
             fontFamily: "WorkSansSemiBold",
             fontSize: 17.0,
-            color: Color.fromRGBO(2, 182, 254, 0.8),
+            color: Colors.orange.withOpacity(0.8),
           ),
         ),
       ),
