@@ -32,7 +32,7 @@ class CustomDrawerHeader extends StatelessWidget {
           children: [
             Icon(
               Icons.person,
-              color: Colors.orange,
+              color: Color.fromRGBO(255, 255, 255, 1.0),
               size: 35,
             ),
             const SizedBox(
@@ -51,7 +51,7 @@ class CustomDrawerHeader extends StatelessWidget {
                               .capitalizeFirstofEach
                           : "Acesse sua conta agora!",
                       style: TextStyle(
-                        color: Colors.orange,
+                        color: Color.fromRGBO(255, 255, 255, 1.0),
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
                         fontFamily: "WorkSansMedium",
@@ -64,7 +64,7 @@ class CustomDrawerHeader extends StatelessWidget {
                     Text(
                       "${userManagerStore.isLoggedIn ? userManagerStore.user!.evento!.toLowerCase().capitalizeFirstofEach : ""}",
                       style: TextStyle(
-                        color: Colors.orange,
+                        color: Color.fromRGBO(2, 182, 254, 1.0),
                         fontSize: 12,
                         fontWeight: FontWeight.w400,
                         fontFamily: "WorkSansMedium",

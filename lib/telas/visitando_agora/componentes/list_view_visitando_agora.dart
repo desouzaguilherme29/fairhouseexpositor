@@ -35,7 +35,7 @@ class ListViewVisitandoAgoraFeira extends StatelessWidget {
           return Container(
             height: 10,
             child: LinearProgressIndicator(
-              valueColor: AlwaysStoppedAnimation(Colors.orange),
+              valueColor: AlwaysStoppedAnimation(Color.fromRGBO(63, 81, 181, 1.0)),
               backgroundColor: Colors.black,
             ),
           );

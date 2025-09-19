@@ -92,8 +92,8 @@ class _AmbienteState extends State<Ambiente> {
                   child: customElevatedButton(
                     context,
                     "Entrar",
-                    Colors.orange,
-                    Colors.orange.withAlpha(120),
+                    Color.fromRGBO(63, 81, 181, 1.0),
+                    Color.fromRGBO(2, 182, 254, 0.5),
                     _entrar,
                   ),
                 )

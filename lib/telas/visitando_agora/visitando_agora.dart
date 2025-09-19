@@ -82,7 +82,7 @@ class VisitandoAgora extends StatelessWidget {
                     } else if (visitantes.showProgress) {
                       return Center(
                         child: CircularProgressIndicator(
-                          valueColor: AlwaysStoppedAnimation(Colors.orange),
+                          valueColor: AlwaysStoppedAnimation(Color.fromRGBO(63, 81, 181, 1.0)),
                         ),
                       );
                     } else if (visitantes.visitanteList.isEmpty) {

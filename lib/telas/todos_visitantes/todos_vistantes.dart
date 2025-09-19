@@ -81,7 +81,7 @@ class TodosVisitantes extends StatelessWidget {
                   margin: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.orange,
+                      backgroundColor: Color.fromRGBO(63, 81, 181, 1.0),
                       padding: EdgeInsets.symmetric(horizontal: 1, vertical: 1),
                       textStyle: TextStyle(
                         fontSize: 15,
@@ -120,7 +120,7 @@ class TodosVisitantes extends StatelessWidget {
                     } else if (visitantes.showProgress) {
                       return Center(
                         child: CircularProgressIndicator(
-                          valueColor: AlwaysStoppedAnimation(Colors.orange),
+                          valueColor: AlwaysStoppedAnimation(Color.fromRGBO(63, 81, 181, 1.0)),
                         ),
                       );
                     } else if (visitantes.visitanteList.isEmpty) {

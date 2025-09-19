@@ -100,8 +100,8 @@ class _PortariaState extends State<Portaria> {
                   child: ElevatedButton(
                       // shape: RoundedRectangleBorder(
                       //     borderRadius: BorderRadius.circular(25)),
-                      // color: Colors.orange,
-                      // disabledColor: Colors.orange.withAlpha(120),
+                      // color: Color.fromRGBO(63, 81, 181, 1.0),
+                      // disabledColor: Color.fromRGBO(2, 182, 254, 0.5),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -145,8 +145,8 @@ class _PortariaState extends State<Portaria> {
                   child: ElevatedButton(
                     // shape: RoundedRectangleBorder(
                     //     borderRadius: BorderRadius.circular(25)),
-                    // color: Colors.orange,
-                    // disabledColor: Colors.orange.withAlpha(120),
+                    // color: Color.fromRGBO(2, 182, 254, 0.5),
+                    // disabledColor: Color.fromRGBO(2, 182, 254, 0.5),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -198,7 +198,7 @@ class _PortariaState extends State<Portaria> {
           border: InputBorder.none,
           icon: Icon(
             _icon,
-            color: Colors.orange.withOpacity(0.8),
+            color: Color.fromRGBO(2, 182, 254, 0.8),
             size: 20.0,
           ),
           labelText: _text,
@@ -206,7 +206,7 @@ class _PortariaState extends State<Portaria> {
           hintStyle: TextStyle(
             fontFamily: "WorkSansSemiBold",
             fontSize: 17.0,
-            color: Colors.orange.withOpacity(0.8),
+            color: Color.fromRGBO(2, 182, 254, 0.8),
           ),
         ),
       ),

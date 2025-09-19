@@ -65,7 +65,7 @@ class MyApp extends StatelessWidget {
       title: "FairHouse",
       theme: ThemeData(
         appBarTheme: AppBarTheme(
-          iconTheme: IconThemeData(color: Colors.orange),
+          iconTheme: IconThemeData(color: Color.fromRGBO(63, 81, 181, 1.0)),
           elevation: 0,
           backgroundColor: Colors.black,
           centerTitle: true,
@@ -81,7 +81,7 @@ class MyApp extends StatelessWidget {
 
       ],
       home: AnimatedSplashScreen.withScreenFunction(
-        splash: "imagens/logo_fairhouse.png",
+        splash: "imagens/logoGeniusPro.png",
         splashIconSize: 80,
         screenFunction: () async {
           if (hora >= 7 && hora < 12) {
@@ -100,7 +100,7 @@ class MyApp extends StatelessWidget {
         },
         splashTransition: SplashTransition.fadeTransition,
         pageTransitionType: PageTransitionType.fade,
-        backgroundColor: Colors.black45,
+        backgroundColor: Colors.black,
       ),
     );
   }

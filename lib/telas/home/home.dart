@@ -103,8 +103,8 @@ class _HomeState extends State<Home> {
                           child: customElevatedButton(
                             context,
                             "Entrar",
-                            Colors.orange,
-                            Colors.orange.withAlpha(120),
+                            Color.fromRGBO(63, 81, 181, 1.0),
+                            Color.fromRGBO(2, 182, 254, 0.5),
                             _entrar,
                           ),
                         )
@@ -175,8 +175,8 @@ class _HomeState extends State<Home> {
                           child: customElevatedButton(
                             context,
                             "Ler",
-                            Colors.orange,
-                            Colors.orange.withAlpha(120),
+                            Color.fromRGBO(63, 81, 181, 1.0),
+                            Color.fromRGBO(2, 182, 254, 0.5),
                             _leVisitante,
                           ),
                         ),
@@ -189,8 +189,8 @@ class _HomeState extends State<Home> {
                           child: customElevatedButton(
                             context,
                             "Gravar",
-                            Colors.orange,
-                            Colors.orange.withAlpha(120),
+                            Color.fromRGBO(63, 81, 181, 1.0),
+                            Color.fromRGBO(2, 182, 254, 0.5),
                             visitante != null ? _gravaVisita : null,
                           ),
                         )
@@ -219,7 +219,7 @@ class _HomeState extends State<Home> {
           border: InputBorder.none,
           icon: Icon(
             _icon,
-            color: Colors.orange.withOpacity(0.8),
+            color: Color.fromRGBO(2, 182, 254, 0.5),
             size: 20.0,
           ),
           labelText: _text,
@@ -227,7 +227,7 @@ class _HomeState extends State<Home> {
           hintStyle: TextStyle(
             fontFamily: "WorkSansSemiBold",
             fontSize: 17.0,
-            color: Colors.orange.withOpacity(0.8),
+            color: Color.fromRGBO(2, 182, 254, 0.5),
           ),
         ),
       ),

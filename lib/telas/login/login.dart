@@ -45,13 +45,13 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
       width: !loginStore.loading ? double.infinity : 90,
       margin: EdgeInsets.only(top: 20, bottom: 30),
       decoration: BoxDecoration(
-        color: Colors.orange,
+        color: Color.fromRGBO(63, 81, 181, 1.0),
         borderRadius: BorderRadius.all(Radius.circular(50)),
         boxShadow: loginStore.loginPressed == null
             ? null
             : [
                 BoxShadow(
-                  color: Colors.orange,
+                  color: Color.fromRGBO(63, 81, 181, 1.0),
                   blurRadius: 10,
                   offset: Offset(0, 5),
                   spreadRadius: 0,
@@ -92,9 +92,9 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
           backgroundColor: MaterialStateProperty.resolveWith<Color>(
             (Set<MaterialState> states) {
               if (loginStore.loginPressed == null)
-                return Colors.orange.shade200;
+                return Color.fromRGBO(2, 182, 254, 0.5);
               else
-                return Colors.orange;
+                return Color.fromRGBO(63, 81, 181, 1.0);
             },
           ),
         ),
@@ -197,7 +197,7 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
     return Container(
       margin: EdgeInsets.only(top: 50, bottom: 10),
       height: MediaQuery.of(context).size.height * 0.35,
-      child: Image.asset("imagens/logo_fairhouse.png"),
+      child: Image.asset("imagens/logoGeniusPro.png"),
     );
   }
 
@@ -210,7 +210,7 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black87,
+      backgroundColor: Colors.black,
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 20),
